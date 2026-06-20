@@ -31,8 +31,8 @@ Tips:
 - Keep files reasonably sized (ideally under ~500 KB each, max ~2000 px on the long
   edge) so the page loads fast.
 - Always write a meaningful `alt` description for accessibility.
-- The hero already has an illustrated Himalayan mountain backdrop, so it looks
-  complete even without a photo — a hero image is optional.
+- The hero uses a dark cinematic backdrop, so it looks complete even without a
+  photo — a hero image is optional.
 
 > The reference maps that were pasted into the original design canvas live in
 > `design-source/uploads/`. They are maps, not photos, so they are **not** wired into

@@ -39,6 +39,7 @@ nothing to build; point the host at the repo root and it serves `index.html`.
 │   ├── styles.css      # global styles, keyframes, responsive + reduced-motion rules
 │   └── main.js         # all interactions (scroll reveal, timeline, map, drum, glossary)
 ├── images/             # drop real photos here — see images/README.md
+├── tools/              # build-nepal-map.py — regenerates the real SVG map of Nepal
 └── design-source/      # original Claude Design canvas export, kept for reference
     ├── Limbu Heritage.dc.html
     ├── support.js          # Claude Design runtime (not used by the site)
@@ -66,4 +67,6 @@ placeholders. To drop in real photographs, see [`images/README.md`](images/READM
 
 Content drawn from Kirat & Limbu scholarship, oral tradition, and the Mundhum.
 Made for education and community pride. Fonts: Marcellus, Hanken Grotesk, Space Mono,
-and Noto Sans Limbu (Google Fonts).
+and Noto Sans Limbu (Google Fonts). The map of Nepal is built from the
+[mesaugat/geoJSON-Nepal](https://github.com/mesaugat/geoJSON-Nepal) district-boundary
+dataset — see `tools/build-nepal-map.py`.

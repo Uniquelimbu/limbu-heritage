@@ -34,7 +34,6 @@ body {
 @keyframes scriptGlow { 0%, 100% { text-shadow: 0 0 26px rgba(232,192,105,.18); } 50% { text-shadow: 0 0 46px rgba(232,192,105,.42); } }
 @keyframes scrollCue { 0% { transform: translateY(0); opacity: .35; } 50% { opacity: 1; } 100% { transform: translateY(9px); opacity: .35; } }
 @keyframes spinSlow { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
-@keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
 
 /* ---------- interactive element focus (keyboard a11y) ---------- */
 [data-navdot]:focus-visible,

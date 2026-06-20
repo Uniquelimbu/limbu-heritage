@@ -11,3 +11,6 @@ desktop.ini
 *.log
 .cache/
 tmp/
+
+# Build scratch (downloaded GeoJSON source, etc.)
+_build/

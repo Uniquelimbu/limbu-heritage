@@ -92,6 +92,34 @@ def centroid(ring):
 def esc(s):
     return html.escape(s, quote=True)
 
+def extend_darchula(ring):
+    """Bulge Darchula's western edge out to Limpiyadhura so the map shows the
+    post-2020 Kalapani-Limpiyadhura-Lipulekh territory as part of the district —
+    one continuous polygon, no seam. The district dataset predates the 2020
+    boundary; coordinates are the documented landmark positions."""
+    r = ring[:-1] if ring[0] == ring[-1] else list(ring)
+    m = len(r)
+    def nearest(pt):
+        return min(range(m), key=lambda i: (r[i][0]-pt[0])**2 + (r[i][1]-pt[1])**2)
+    iS = nearest((80.58, 29.95)); iN = nearest((80.92, 30.25))
+    def arc(a, b):
+        out, i = [], a
+        while True:
+            out.append(i)
+            if i == b: break
+            i = (i + 1) % m
+        return out
+    a1, a2 = arc(iS, iN), arc(iN, iS)
+    # Keep the long arc (the district body, which reaches the real SW corner);
+    # replace the short arc (the de-facto NW river edge) with the claim line.
+    if len(a1) >= len(a2):
+        base = [r[i] for i in a1]                      # ends at iN (north)
+        detour = [(80.30, 30.22), (80.05, 30.17), (80.12, 30.06), (80.42, 29.98)]
+    else:
+        base = [r[i] for i in a2]                      # ends at iS (south)
+        detour = [(80.42, 29.98), (80.12, 30.06), (80.05, 30.17), (80.30, 30.22)]
+    return base + detour
+
 VBW = WIDTH + 2*PAD
 VBH = H + 2*PAD
 
@@ -111,6 +139,10 @@ for f in feats:
         big = max(f['geometry']['coordinates'], key=len)
         cx, cy = centroid(big)
         labels.append((cx, cy))
+    elif name == 'DARCHULA':
+        # extend the far-NW district to the post-2020 Limpiyadhura boundary
+        d = ring_path(extend_darchula(f['geometry']['coordinates'][0]), tol=1.2, dec=1)
+        base_paths.append(f'<path d="{d}" fill="#c7b388"></path>')
     else:
         d = feature_path(f, tol=1.5, dec=0)
         base_paths.append(f'<path d="{d}" fill="#c7b388"></path>')

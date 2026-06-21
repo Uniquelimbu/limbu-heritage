@@ -124,20 +124,31 @@ body {
 .lim-card .realm { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .02em; color: #a14227; }
 .lim-card .cap { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(36, 24, 17, .5); margin-top: auto; padding-top: 12px; }
 
-.lim-time { border-left: 2px solid rgba(161, 66, 39, .3); margin: 0; padding: 0; list-style: none; }
+.lim-time { position: relative; border-left: 2px solid rgba(161, 66, 39, .4); margin: 0; padding: 0 0 clamp(20px, 3vw, 28px); list-style: none; }
 .lim-time li { position: relative; padding: 0 0 clamp(22px, 3vw, 32px) clamp(24px, 3vw, 36px); }
 .lim-time li:last-child { padding-bottom: 0; }
+/* Round event dots. Pseudo-elements aren't covered by the global border-box
+   rule, so width:12 + 2px border renders a 16px box — left:-9 centres that on
+   the 2px rule (left:-7 left it 2px to the right). */
 .lim-time li::before {
-  content: ''; position: absolute; left: -7px; top: 5px;
+  content: ''; position: absolute; left: -9px; top: 5px;
   width: 12px; height: 12px; border-radius: 50%;
   background: #e7dcc4; border: 2px solid #a14227;
 }
 .lim-time li.is-fall::before { background: #a14227; }
 .lim-time li.lim-era { padding-top: clamp(18px, 2.6vw, 30px); padding-bottom: clamp(14px, 2vw, 20px); }
 .lim-time li.lim-era:first-child { padding-top: 0; }
+/* Era headers and the closing cap share a 15px tilted square, centred on the
+   rule (left:-8.5 → centre sits on the 2px line). */
 .lim-time li.lim-era::before {
-  left: -8px; top: 3px; width: 15px; height: 15px;
+  left: -8.5px; top: 3px; width: 15px; height: 15px;
   border-radius: 2px; border: none; background: #a14227; transform: rotate(45deg);
+}
+/* Close the timeline with a tilted square that mirrors the opening era marker. */
+.lim-time::after {
+  content: ''; position: absolute; left: -8.5px; bottom: -7.5px;
+  width: 15px; height: 15px; border-radius: 2px;
+  background: #a14227; transform: rotate(45deg);
 }
 .lim-time .era { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; color: #a14227; }
 .lim-time .yr { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(161, 66, 39, .85); }

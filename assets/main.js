@@ -46,6 +46,7 @@
     setupLogo();
     setupReveal();
     setupDust();
+    setupSparks();
     setupScroll();
     setupNav();
     setupGlossary();
@@ -255,6 +256,37 @@
         (Math.random() * 100) + '%;bottom:' + (Math.random() * 40) + '%;animation:floatDust ' +
         (7 + Math.random() * 8) + 's linear ' + (Math.random() * 8) + 's infinite';
       dust.appendChild(p);
+    }
+  }
+
+  /* ---- hero sparks ----
+     A light scatter of bright embers that shoot up off the fire and burn out,
+     layered over the slower dust. Kept deliberately sparse so it stays an
+     accent, not a snowstorm. Shares the hero particle layer + reduced-motion
+     opt-out with the dust. */
+  function setupSparks() {
+    if (prefersReduced) return;
+    var host = document.querySelector('[data-dust]');
+    if (!host) return;
+    var count = window.innerWidth < 600 ? 4 : 9;   // light on purpose
+    for (var i = 0; i < count; i++) {
+      var s = document.createElement('div');
+      var sz = (1.6 + Math.random() * 2).toFixed(1);                // 1.6–3.6px
+      var sx = Math.round(Math.random() * 120 - 60);                // -60..60px sideways drift
+      var sy = -Math.round(150 + Math.random() * 170);              // rise 150..320px
+      var dur = (2.3 + Math.random() * 2.4).toFixed(2);             // 2.3–4.7s
+      var delay = (Math.random() * 6).toFixed(2);
+      var warm = Math.random() < 0.5 ? '255,196,92' : '255,148,58'; // gold or ember-orange
+      s.style.cssText =
+        'position:absolute;pointer-events:none;border-radius:50%;opacity:0;' +
+        'width:' + sz + 'px;height:' + sz + 'px;' +
+        'left:' + (Math.random() * 100).toFixed(1) + '%;' +
+        'bottom:' + (Math.random() * 28).toFixed(1) + '%;' +
+        'background:rgba(' + warm + ',.95);' +
+        'box-shadow:0 0 6px 1px rgba(' + warm + ',.55);' +
+        '--sx:' + sx + 'px;--sy:' + sy + 'px;' +
+        'animation:emberRise ' + dur + 's ease-out ' + delay + 's infinite';
+      host.appendChild(s);
     }
   }
 

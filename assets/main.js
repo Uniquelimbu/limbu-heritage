@@ -96,7 +96,7 @@
       }
       var bar = document.createElement('span');
       bar.setAttribute('data-king-bar', '');
-      bar.style.cssText = 'display:block;width:100%;max-width:15px;height:46px;border-radius:7px 7px 2px 2px;background:rgba(236,225,205,.18);transition:height .35s cubic-bezier(.16,.85,.3,1),background .3s';
+      bar.style.cssText = 'display:block;width:100%;max-width:15px;height:46px;border-radius:7px 7px 2px 2px;background:rgba(236,225,205,.4);transition:height .35s cubic-bezier(.16,.85,.3,1),background .3s';
       btn.appendChild(bar);
       frag.appendChild(btn);
     }
@@ -184,21 +184,33 @@
             el.style.transform = 'translate3d(0,' + (center * -sp).toFixed(1) + 'px,0)';
           });
         }
-        var active = 0;
+        var active = 0, navLight = false;
         chapters.forEach(function (c, i) {
-          if (c.getBoundingClientRect().top <= vh * 0.42) active = i;
+          var r = c.getBoundingClientRect();
+          if (r.top <= vh * 0.42) active = i;
+          // which section sits behind the fixed nav (its vertical centre)?
+          if (r.top <= vh * 0.5 && r.bottom >= vh * 0.5) {
+            navLight = (c.id === 'sec-map' || c.id === 'sec-dance' || c.id === 'sec-tongba');
+          }
         });
+        // adapt the tracker's colours to that section so it stays visible on
+        // the cream sections (light dots/labels were invisible there before).
+        var accent = navLight ? '#a23f24' : '#c89a3e';
+        var idle = navLight ? 'rgba(36,24,17,.5)' : 'rgba(236,225,205,.42)';
+        var labelInk = navLight ? '#241811' : 'rgba(236,225,205,.78)';
+        var labelHalo = navLight ? '0 1px 6px rgba(245,236,214,.7)' : '0 1px 6px rgba(18,12,8,.55)';
         dots.forEach(function (d, i) {
           var on = i === active;
           var tick = d.querySelector('[data-navtick]');
+          var lab = d.querySelector('[data-navlabel]');
           if (on) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
           if (tick) {
-            tick.style.background = on ? '#c89a3e' : 'transparent';
-            tick.style.borderColor = on ? '#c89a3e' : 'rgba(236,225,205,.32)';
+            tick.style.background = on ? accent : 'transparent';
+            tick.style.borderColor = on ? accent : idle;
             tick.style.transform = on ? 'scale(1.35)' : 'scale(1)';
           }
-          // labels are revealed on hover/focus via CSS (and persistently for
-          // the active chapter only on very wide screens) — see styles.css.
+          // visibility is handled in CSS (hover/focus + active on wide screens)
+          if (lab) { lab.style.color = labelInk; lab.style.textShadow = labelHalo; }
         });
         ticking = false;
       });
@@ -373,7 +385,7 @@
       var nm = x.querySelector('[data-king-name]');
       if (!bar) return;
       bar.style.height = on ? (hi ? '152px' : '94px') : (hi ? '124px' : '46px');
-      bar.style.background = on ? 'linear-gradient(180deg,#e8c069,#b14a30)' : (hi ? 'rgba(200,154,62,.6)' : 'rgba(236,225,205,.18)');
+      bar.style.background = on ? 'linear-gradient(180deg,#e8c069,#b14a30)' : (hi ? 'rgba(200,154,62,.6)' : 'rgba(236,225,205,.4)');
       bar.style.boxShadow = on ? '0 0 18px rgba(200,154,62,.45)' : 'none';
       if (nm) nm.style.color = on ? '#f6ead0' : '#e7c87f';
     }

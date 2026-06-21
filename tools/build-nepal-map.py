@@ -119,7 +119,7 @@ for f in feats:
 # cramped district labels (individual names show in the detail card on hover/tap)
 ccx = sum(c[0] for c in labels) / len(labels)
 ccy = sum(c[1] for c in labels) / len(labels)
-label_svg = f'<text x="{ccx:.0f}" y="{ccy:.0f}" font-size="17" letter-spacing=".22em">LIMBUWAN</text>'
+label_svg = f'<text x="{ccx:.0f}" y="{ccy:.0f}" font-size="19" letter-spacing=".22em">LIMBUWAN</text>'
 
 svg = (
     f'<svg viewBox="0 0 {VBW:.0f} {VBH:.0f}" width="100%" style="display:block;overflow:visible" '
@@ -129,7 +129,7 @@ svg = (
     f'            <g data-districts stroke="#241811" stroke-width="1.1" stroke-linejoin="round">'
     + ''.join(limbu_paths) + '</g>\n'
     f'            <g font-family="\'Space Mono\',monospace" font-weight="700" fill="#1c130d" '
-    f'text-anchor="middle" paint-order="stroke" stroke="rgba(245,236,214,.85)" stroke-width="2.2" '
+    f'text-anchor="middle" paint-order="stroke" stroke="rgba(245,236,214,.92)" stroke-width="3" '
     f'stroke-linejoin="round" letter-spacing=".02em" style="pointer-events:none">'
     + label_svg + '</g>\n'
     f'          </svg>')

@@ -32,8 +32,6 @@ body {
 @keyframes drumPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 @keyframes scriptIn { 0% { opacity: 0; filter: blur(14px); letter-spacing: .4em; transform: translateY(26px); } 100% { opacity: 1; filter: blur(0); letter-spacing: .02em; transform: translateY(0); } }
 @keyframes scriptGlow { 0%, 100% { text-shadow: 0 0 26px rgba(232,192,105,.18); } 50% { text-shadow: 0 0 46px rgba(232,192,105,.42); } }
-@keyframes scrollCue { 0% { transform: translateY(0); opacity: .35; } 50% { opacity: 1; } 100% { transform: translateY(9px); opacity: .35; } }
-@keyframes spinSlow { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
 
 /* ---------- interactive element focus (keyboard a11y) ---------- */
 [data-navdot]:focus-visible,
@@ -45,6 +43,13 @@ a:focus-visible {
   outline: 2px solid #e8c069;
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* On the cream sections the gold ring is nearly invisible — use dark ink there. */
+#sec-map :focus-visible,
+#sec-dance :focus-visible,
+#sec-tongba :focus-visible {
+  outline-color: #241811;
 }
 
 /* skip link — hidden until focused (keyboard users) */
@@ -138,7 +143,12 @@ nav[data-chapnav] [data-navdot]:focus-visible [data-navlabel] {
 }
 .img-slot--cream .img-slot__glyph { color: rgba(138,52,32,.7); }
 .img-slot--cream .img-slot__label { color: rgba(36,24,17,.62); }
-.img-slot::before { content: ""; display: block; width: 100%; }
+/* aspect-ratio fallback for engines without `aspect-ratio` (pre-2021): give the
+   three ratio'd figures real height via a padding spacer so they don't collapse. */
+@supports not (aspect-ratio: 1 / 1) {
+  .img-slot[style*="aspect-ratio:4/5"]::before { content: ""; display: block; padding-top: 125%; }
+  .img-slot[style*="aspect-ratio:5/4"]::before { content: ""; display: block; padding-top: 80%; }
+}
 
 /* When a real image is supplied (data-src wired by JS), it covers the slot */
 .img-slot > img {
@@ -170,15 +180,18 @@ nav[data-chapnav] [data-navdot]:focus-visible [data-navlabel] {
   }
   [data-king] { min-width: 22px !important; }
 
-  /* district detail card: stop overlapping the map, flow beneath it */
+  /* chapter nav rail eats horizontal space on phones — hide it */
+  nav[data-chapnav] { display: none !important; }
+}
+
+/* district detail card: stop overlapping the map, flow beneath it — across the
+   whole small-tablet band, not just phones. */
+@media (max-width: 900px) {
   #district-detail {
     position: static !important;
     width: auto !important;
     margin-top: 16px;
   }
-
-  /* chapter nav rail eats horizontal space on phones — hide it */
-  nav[data-chapnav] { display: none !important; }
 }
 
 /* tooltip becomes a bottom sheet on touch / small screens */
@@ -190,6 +203,8 @@ nav[data-chapnav] [data-navdot]:focus-visible [data-navlabel] {
     bottom: 14px !important;
     max-width: none !important;
   }
+  /* move the audio toggle up so the full-width glossary sheet can't cover it */
+  #audio-toggle { bottom: auto !important; top: 14px !important; }
 }
 
 /* ---------- reduced motion ---------- */

@@ -100,12 +100,13 @@ for f in feats:
     name = f['properties'].get('DISTRICT')
     if name in LIMBU:
         disp, tag, desc, col = LIMBU[name]
-        d = feature_path(f, tol=0.6, dec=1)
+        d = feature_path(f, tol=0.6, dec=0)
         pressed = 'true' if name == 'TAPLEJUNG' else 'false'
         limbu_paths.append(
             f'<path data-district data-name="{esc(disp)}" data-tag="{esc(tag)}" '
             f'data-desc="{esc(desc)}" role="button" tabindex="0" aria-pressed="{pressed}" '
             f'aria-label="{esc(disp)} — {esc(tag.replace("&","and"))}" d="{d}" fill="{col}" '
+            f'vector-effect="non-scaling-stroke" '
             f'style="cursor:pointer;transition:filter .25s ease,opacity .25s ease"></path>')
         # largest ring centroid — used to place the single region wordmark
         big = max(f['geometry']['coordinates'], key=len)

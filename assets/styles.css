@@ -160,6 +160,69 @@ nav[data-chapnav] [data-navdot]:focus-visible [data-navlabel] {
   display: block;
 }
 
+/* ---------- touch polish ---------- */
+a, button, [data-navdot], [data-king], [data-term], [data-district], .district-chip,
+#audio-toggle, #dance-audio-cue {
+  -webkit-tap-highlight-color: rgba(200,154,62,.22);
+}
+/* manipulation suppresses double-tap-zoom; the kings rail is excluded so a
+   horizontal swipe still scrolls it. */
+[data-term], [data-district], .district-chip, #audio-toggle, #dance-audio-cue {
+  touch-action: manipulation;
+}
+[data-term]:active, [data-district]:active, .district-chip:active,
+#audio-toggle:active, #dance-audio-cue:active, [data-navdot]:active { opacity: .65; }
+
+/* mobile chapter caption — current section name, top-left (revealed under 720px) */
+#chapter-caption {
+  display: none;
+  position: fixed;
+  z-index: 119;
+  top: calc(env(safe-area-inset-top, 0px) + 10px);
+  left: calc(env(safe-area-inset-left, 0px) + 14px);
+  max-width: 62vw;
+  padding: 5px 11px;
+  border-radius: 20px;
+  background: rgba(18,12,8,.74);
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+  color: rgba(243,232,210,.92);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+/* tappable district selector for phones — the SVG cluster is too small to tap */
+.district-chips { display: none; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.district-chip {
+  flex: 1 1 auto;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid rgba(36,24,17,.26);
+  border-radius: 12px;
+  background: rgba(255,252,244,.5);
+  color: #2a1c12;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  letter-spacing: .03em;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.district-chip.is-active { background: #7a3b2e; color: #f3e8d2; border-color: #7a3b2e; }
+
+/* kings detail card: stack the reign disc above the text on small phones */
+@media (max-width: 520px) {
+  #king-detail { flex-direction: column; align-items: flex-start; min-height: auto; }
+  #king-detail > div:first-child { width: 84px !important; height: 84px !important; }
+}
+
 /* ---------- responsive ---------- */
 
 /* Mid-range (721px–1100px): the centered content sits close to the left edge,
@@ -172,16 +235,28 @@ nav[data-chapnav] [data-navdot]:focus-visible [data-navlabel] {
 /* kings rail: allow horizontal scroll on narrow screens so 29 bars never
    overflow / squash into the page (was an overflow bug on mobile). */
 @media (max-width: 720px) {
+  /* kings rail: wider tap targets, snap to taps, and a right-edge fade so the
+     off-screen bars are discoverable as swipeable. */
   [data-kings-rail] {
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 6px;
+    touch-action: pan-x;
+    scroll-snap-type: x proximity;
+    -webkit-mask-image: linear-gradient(90deg, #000 90%, transparent);
+            mask-image: linear-gradient(90deg, #000 90%, transparent);
   }
-  [data-king] { min-width: 22px !important; }
+  [data-king] { min-width: 36px !important; scroll-snap-align: center; }
 
-  /* chapter nav rail eats horizontal space on phones — hide it */
+  /* chapter nav rail eats horizontal space on phones — hide it; the caption
+     + district chips take over as the mobile affordances. */
   nav[data-chapnav] { display: none !important; }
+  #chapter-caption { display: block; }
+  .district-chips { display: flex; }
+
+  /* enlarge the inline glossary tap target without disturbing line flow */
+  [data-term] { display: inline-block; padding: 6px 3px; margin: -6px 0; line-height: 1; }
 }
 
 /* district detail card: stop overlapping the map, flow beneath it — across the
@@ -200,11 +275,18 @@ nav[data-chapnav] [data-navdot]:focus-visible [data-navlabel] {
     left: 12px !important;
     right: 12px !important;
     top: auto !important;
-    bottom: 14px !important;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
     max-width: none !important;
   }
-  /* move the audio toggle up so the full-width glossary sheet can't cover it */
-  #audio-toggle { bottom: auto !important; top: 14px !important; }
+  /* compact icon audio button, clear of the glossary sheet and the notch */
+  #audio-toggle {
+    bottom: auto !important;
+    top: calc(14px + env(safe-area-inset-top, 0px)) !important;
+    padding: 9px !important;
+  }
+  #audio-label { display: none; }
+  /* the .05-opacity blended grain isn't worth its per-scroll-frame cost here */
+  [data-grain] { display: none; }
 }
 
 /* ---------- reduced motion ---------- */

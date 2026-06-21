@@ -143,7 +143,8 @@
     if (prefersReduced) return;
     var dust = document.querySelector('[data-dust]');
     if (!dust) return;
-    for (var i = 0; i < 14; i++) {
+    var count = window.innerWidth < 600 ? 0 : 14;  // skip the embers on phones
+    for (var i = 0; i < count; i++) {
       var p = document.createElement('div');
       var sz = 2 + Math.random() * 3;
       p.style.cssText = 'position:absolute;border-radius:50%;background:rgba(232,192,105,' +
@@ -161,6 +162,8 @@
     var heroFade = document.querySelector('[data-herofade]');
     var chapters = q('[data-chapter]');
     var dots = q('[data-navdot]');
+    var caption = document.getElementById('chapter-caption');
+    var navHidden = window.innerWidth < 720;
     var ticking = false;
 
     function onScroll() {
@@ -193,31 +196,41 @@
             navLight = (c.id === 'sec-map' || c.id === 'sec-dance' || c.id === 'sec-tongba');
           }
         });
-        // adapt the tracker's colours to that section so it stays visible on
-        // the cream sections (light dots/labels were invisible there before).
-        var accent = navLight ? '#a23f24' : '#c89a3e';
-        var idle = navLight ? 'rgba(36,24,17,.5)' : 'rgba(236,225,205,.42)';
-        var labelInk = navLight ? '#241811' : 'rgba(236,225,205,.78)';
-        var labelHalo = navLight ? '0 1px 6px rgba(245,236,214,.7)' : '0 1px 6px rgba(18,12,8,.55)';
-        dots.forEach(function (d, i) {
-          var on = i === active;
-          var tick = d.querySelector('[data-navtick]');
-          var lab = d.querySelector('[data-navlabel]');
-          if (on) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
-          if (tick) {
-            tick.style.background = on ? accent : 'transparent';
-            tick.style.borderColor = on ? accent : idle;
-            tick.style.transform = on ? 'scale(1.35)' : 'scale(1)';
-          }
-          // visibility is handled in CSS (hover/focus + active on wide screens)
-          if (lab) { lab.style.color = labelInk; lab.style.textShadow = labelHalo; }
-        });
+        // mobile wayfinding: the side rail is hidden on phones, so surface the
+        // current chapter name in a small caption. Blank on the hero.
+        if (caption) {
+          var lbl = active > 0 ? (chapters[active].getAttribute('data-screen-label') || '') : '';
+          if (caption.textContent !== lbl) caption.textContent = lbl;
+          caption.style.opacity = lbl ? '1' : '0';
+        }
+        // the chapter rail is display:none under 720px — skip its per-frame
+        // restyle entirely on phones.
+        if (!navHidden) {
+          // adapt the tracker's colours to the section behind it so it stays
+          // visible on the cream sections (light dots were invisible there).
+          var accent = navLight ? '#a23f24' : '#c89a3e';
+          var idle = navLight ? 'rgba(36,24,17,.5)' : 'rgba(236,225,205,.42)';
+          var labelInk = navLight ? '#241811' : 'rgba(236,225,205,.78)';
+          var labelHalo = navLight ? '0 1px 6px rgba(245,236,214,.7)' : '0 1px 6px rgba(18,12,8,.55)';
+          dots.forEach(function (d, i) {
+            var on = i === active;
+            var tick = d.querySelector('[data-navtick]');
+            var lab = d.querySelector('[data-navlabel]');
+            if (on) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+            if (tick) {
+              tick.style.background = on ? accent : 'transparent';
+              tick.style.borderColor = on ? accent : idle;
+              tick.style.transform = on ? 'scale(1.35)' : 'scale(1)';
+            }
+            if (lab) { lab.style.color = labelInk; lab.style.textShadow = labelHalo; }
+          });
+        }
         ticking = false;
       });
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    window.addEventListener('resize', function () { navHidden = window.innerWidth < 720; onScroll(); });
     onScroll();
   }
 
@@ -339,9 +352,11 @@
     var ddName = dd.querySelector('[data-dd-name]');
     var ddTag = dd.querySelector('[data-dd-tag]');
     var ddDesc = dd.querySelector('[data-dd-desc]');
+    var chips = {}; // district name -> mobile chip button
 
     function select(p) {
-      ddName.textContent = p.getAttribute('data-name');
+      var name = p.getAttribute('data-name');
+      ddName.textContent = name;
       ddTag.textContent = p.getAttribute('data-tag');
       ddDesc.textContent = p.getAttribute('data-desc');
       dpaths.forEach(function (o) {
@@ -351,6 +366,11 @@
         o.style.stroke = on ? '#f4ead2' : '#241811';
         o.style.strokeWidth = on ? '3.4' : '2';
         o.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      Object.keys(chips).forEach(function (n) {
+        var on = n === name;
+        chips[n].classList.toggle('is-active', on);
+        chips[n].setAttribute('aria-pressed', on ? 'true' : 'false');
       });
       // raise the active path so its highlighted stroke is not clipped
       p.parentNode.appendChild(p);
@@ -364,6 +384,26 @@
         if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); select(p); }
       });
     });
+
+    // Tappable district chips — the map cluster is far too small to tap on a
+    // phone, so this row of >=44px buttons drives the same selection. Shown on
+    // small screens via CSS; hidden on desktop where the map hover works.
+    var wrap = document.createElement('div');
+    wrap.className = 'district-chips';
+    wrap.setAttribute('role', 'group');
+    wrap.setAttribute('aria-label', 'Select a Limbuwan district');
+    dpaths.forEach(function (p) {
+      var name = p.getAttribute('data-name');
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'district-chip';
+      b.textContent = name;
+      b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', function () { select(p); });
+      chips[name] = b;
+      wrap.appendChild(b);
+    });
+    dd.parentNode.insertBefore(wrap, dd);
 
     var initial = dpaths.filter(function (p) { return p.getAttribute('data-name') === 'Taplejung'; })[0] || dpaths[0];
     select(initial);

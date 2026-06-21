@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logo — Radiate</title>
+<style>
+  :root{ --logo:#f1e3c8; }          /* change this to recolor the mark */
+  html,body{ margin:0; height:100%; background:transparent; }
+  #stage{
+    width:100%; height:100%;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;                  /* click anywhere to replay */
+  }
+  #mark{
+    width:min(78vmin,520px); height:min(78vmin,520px);
+    color:var(--logo); overflow:visible;
+  }
+</style>
+</head>
+<body>
+  <div id="stage" title="Click to replay">
+    <svg id="mark" viewBox="0 0 600 600" fill="none" stroke="currentColor" stroke-width="16"
+         stroke-linecap="square" stroke-linejoin="miter">
+      <path data-role="ring" data-i="0" d="M300,260 L340,300 L300,340 L260,300 Z"/>
+      <path data-role="ring" data-i="1" d="M300,224 L376,300 L300,376 L224,300 Z"/>
+      <path data-role="ring" data-i="2" d="M300,188 L412,300 L300,412 L188,300 Z"/>
+      <path data-role="ring" data-i="3" d="M300,152 L448,300 L300,448 L152,300 Z"/>
+      <path data-role="ring" data-i="4" d="M300,116 L484,300 L300,484 L116,300 Z"/>
+      <path data-role="cdot" d="M300,285 L315,300 L300,315 L285,300 Z" fill="currentColor"/>
+      <g data-orn data-dir="T">
+        <path data-role="spike" d="M300,116 L329.7,86.3"/>
+        <path data-role="spike" d="M300,116 L270.3,86.3"/>
+        <path data-role="chev" d="M321.2,46.8 L300,68 L278.8,46.8"/>
+        <path data-role="odot" d="M300,15 L311,26 L300,37 L289,26 Z" fill="currentColor"/>
+      </g>
+      <g data-orn data-dir="R">
+        <path data-role="spike" d="M484,300 L513.7,329.7"/>
+        <path data-role="spike" d="M484,300 L513.7,270.3"/>
+        <path data-role="chev" d="M553.2,321.2 L532,300 L553.2,278.8"/>
+        <path data-role="odot" d="M574,289 L585,300 L574,311 L563,300 Z" fill="currentColor"/>
+      </g>
+      <g data-orn data-dir="B">
+        <path data-role="spike" d="M300,484 L270.3,513.7"/>
+        <path data-role="spike" d="M300,484 L329.7,513.7"/>
+        <path data-role="chev" d="M278.8,553.2 L300,532 L321.2,553.2"/>
+        <path data-role="odot" d="M300,563 L311,574 L300,585 L289,574 Z" fill="currentColor"/>
+      </g>
+      <g data-orn data-dir="L">
+        <path data-role="spike" d="M116,300 L86.3,270.3"/>
+        <path data-role="spike" d="M116,300 L86.3,329.7"/>
+        <path data-role="chev" d="M46.8,278.8 L68,300 L46.8,321.2"/>
+        <path data-role="odot" d="M26,289 L37,300 L26,311 L15,300 Z" fill="currentColor"/>
+      </g>
+    </svg>
+  </div>
+
+<script>
+(function(){
+  var SPEED = 1;            // 1 = default. Try 1.4 (slower) or 0.7 (snappier).
+  var svg = document.getElementById('mark');
+  var axis = { T:[0,-1], R:[1,0], B:[0,1], L:[-1,0] };
+  var order = ['T','R','B','L'];
+  var anims = [];
+
+  function pop(el, delay, dur){
+    el.style.transformBox='fill-box'; el.style.transformOrigin='center';
+    return el.animate(
+      [{opacity:0,transform:'scale(.3)'},
+       {opacity:1,transform:'scale(1.12)',offset:.62},
+       {opacity:1,transform:'scale(1)'}],
+      {delay:delay*SPEED,duration:dur*SPEED,fill:'both',easing:'cubic-bezier(.18,.7,.3,1)'});
+  }
+  function ringScale(el, delay, dur){
+    el.style.transformBox='view-box'; el.style.transformOrigin='300px 300px';
+    return el.animate(
+      [{opacity:0,transform:'scale(.5)'},{opacity:1,transform:'scale(1)'}],
+      {delay:delay*SPEED,duration:dur*SPEED,fill:'both',easing:'cubic-bezier(.2,.7,.25,1)'});
+  }
+  function draw(el, delay, dur){
+    var len=100; try{ len=el.getTotalLength(); }catch(e){}
+    el.style.strokeDasharray=len;
+    return el.animate(
+      [{strokeDashoffset:len},{strokeDashoffset:0}],
+      {delay:delay*SPEED,duration:dur*SPEED,fill:'both',easing:'cubic-bezier(.45,.05,.2,1)'});
+  }
+  function fadeSlide(el, delay, dur, dx, dy){
+    el.style.transformBox='fill-box'; el.style.transformOrigin='center';
+    return el.animate(
+      [{opacity:0,transform:'translate('+dx+'px,'+dy+'px)'},
+       {opacity:1,transform:'translate(0,0)'}],
+      {delay:delay*SPEED,duration:dur*SPEED,fill:'both',easing:'cubic-bezier(.18,.7,.3,1)'});
+  }
+
+  function play(){
+    anims.forEach(function(a){ try{ a.cancel(); }catch(e){} });
+    anims = [];
+    svg.style.opacity = '1';
+    var rings = Array.prototype.slice.call(svg.querySelectorAll('[data-role=ring]'))
+                  .sort(function(a,b){ return a.dataset.i - b.dataset.i; });
+    anims.push(pop(svg.querySelector('[data-role=cdot]'), 0, 420));
+    rings.forEach(function(r,i){ anims.push(ringScale(r, 320+i*130, 560)); });
+    order.forEach(function(d,di){
+      var g = svg.querySelector('[data-dir='+d+']');
+      g.querySelectorAll('[data-role=spike]').forEach(function(sp){ anims.push(draw(sp, 1250+di*70, 300)); });
+      anims.push(fadeSlide(g.querySelector('[data-role=chev]'), 1640+di*70, 360, axis[d][0]*12, axis[d][1]*12));
+      anims.push(pop(g.querySelector('[data-role=odot]'), 1990+di*70, 360));
+    });
+  }
+
+  svg.style.opacity = '0';
+  document.getElementById('stage').addEventListener('click', play);
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    requestAnimationFrame(play);
+  } else {
+    window.addEventListener('DOMContentLoaded', function(){ requestAnimationFrame(play); });
+  }
+})();
+</script>
+</body>
+</html>

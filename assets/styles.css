@@ -27,6 +27,17 @@ body {
 /* Limbu (Sirijunga) script — hint language for screen readers / shaping */
 .limbu { font-family: 'Noto Sans Limbu', serif; }
 
+/* Editorial drop cap — opens the Origins narrative like an illuminated manuscript */
+.dropcap::first-letter {
+  float: left;
+  font-family: 'Marcellus', serif;
+  font-weight: 400;
+  font-size: 3.6em;
+  line-height: .76;
+  margin: 6px 14px 0 0;
+  color: #c89a3e;
+}
+
 /* ---------- keyframes ---------- */
 @keyframes floatDust { 0% { transform: translateY(0); opacity: 0; } 12% { opacity: .6; } 60% { opacity: .7; } 100% { transform: translateY(-90px); opacity: 0; } }
 @keyframes drumPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }

@@ -43,6 +43,7 @@
   /* ---------------------------------------------------------- */
   function wire() {
     buildKings();
+    setupLogo();
     setupReveal();
     setupDust();
     setupScroll();
@@ -103,6 +104,73 @@
     rail.appendChild(frag);
   }
 
+  /* ---- Silam Sakma emblem: radiate-in on load (Web Animations) ---- */
+  function setupLogo() {
+    var svg = document.getElementById('silam-sakma');
+    if (!svg) return;
+
+    // No motion path: just present the finished mark, no entrance animation.
+    if (prefersReduced || typeof svg.animate !== 'function') {
+      svg.style.opacity = '1';
+      return;
+    }
+
+    var SPEED = 1; // 1 = default. Higher = slower, lower = snappier.
+    var axis = { T: [0, -1], R: [1, 0], B: [0, 1], L: [-1, 0] };
+    var order = ['T', 'R', 'B', 'L'];
+    var anims = [];
+
+    function pop(el, delay, dur) {
+      el.style.transformBox = 'fill-box'; el.style.transformOrigin = 'center';
+      return el.animate(
+        [{ opacity: 0, transform: 'scale(.3)' },
+         { opacity: 1, transform: 'scale(1.12)', offset: .62 },
+         { opacity: 1, transform: 'scale(1)' }],
+        { delay: delay * SPEED, duration: dur * SPEED, fill: 'both', easing: 'cubic-bezier(.18,.7,.3,1)' });
+    }
+    function ringScale(el, delay, dur) {
+      el.style.transformBox = 'view-box'; el.style.transformOrigin = '300px 300px';
+      return el.animate(
+        [{ opacity: 0, transform: 'scale(.5)' }, { opacity: 1, transform: 'scale(1)' }],
+        { delay: delay * SPEED, duration: dur * SPEED, fill: 'both', easing: 'cubic-bezier(.2,.7,.25,1)' });
+    }
+    function draw(el, delay, dur) {
+      var len = 100; try { len = el.getTotalLength(); } catch (e) { /* layout not ready */ }
+      el.style.strokeDasharray = len;
+      return el.animate(
+        [{ strokeDashoffset: len }, { strokeDashoffset: 0 }],
+        { delay: delay * SPEED, duration: dur * SPEED, fill: 'both', easing: 'cubic-bezier(.45,.05,.2,1)' });
+    }
+    function fadeSlide(el, delay, dur, dx, dy) {
+      el.style.transformBox = 'fill-box'; el.style.transformOrigin = 'center';
+      return el.animate(
+        [{ opacity: 0, transform: 'translate(' + dx + 'px,' + dy + 'px)' },
+         { opacity: 1, transform: 'translate(0,0)' }],
+        { delay: delay * SPEED, duration: dur * SPEED, fill: 'both', easing: 'cubic-bezier(.18,.7,.3,1)' });
+    }
+
+    function play() {
+      anims.forEach(function (a) { try { a.cancel(); } catch (e) { /* already gone */ } });
+      anims = [];
+      svg.style.opacity = '1';
+      var rings = q('[data-role=ring]', svg)
+        .sort(function (a, b) { return a.dataset.i - b.dataset.i; });
+      anims.push(pop(svg.querySelector('[data-role=cdot]'), 0, 420));
+      rings.forEach(function (r, i) { anims.push(ringScale(r, 320 + i * 130, 560)); });
+      order.forEach(function (d, di) {
+        var g = svg.querySelector('[data-dir=' + d + ']');
+        q('[data-role=spike]', g).forEach(function (sp) { anims.push(draw(sp, 1250 + di * 70, 300)); });
+        anims.push(fadeSlide(g.querySelector('[data-role=chev]'), 1640 + di * 70, 360, axis[d][0] * 12, axis[d][1] * 12));
+        anims.push(pop(g.querySelector('[data-role=odot]'), 1990 + di * 70, 360));
+      });
+    }
+
+    svg.style.opacity = '0';
+    var stage = svg.parentNode; // click the emblem to replay
+    if (stage) stage.addEventListener('click', play);
+    requestAnimationFrame(play);
+  }
+
   /* ---- reveal on scroll ---- */
   function setupReveal() {
     var items = q('[data-reveal]');
@@ -117,10 +185,18 @@
         if (!e.isIntersecting) return;
         var el = e.target;
         var d = parseFloat(el.getAttribute('data-reveal-delay') || '0');
+        // Promote to its own compositor layer for the duration of the reveal so
+        // the fade + slide is GPU-composited (smooth) instead of repainted each
+        // frame, then drop the hint once the transition settles.
+        el.style.willChange = 'opacity, transform';
         el.style.transitionDelay = d + 'ms';
         el.style.opacity = '1';
         el.style.transform = 'none';
         el.style.filter = 'blur(0px)';
+        el.addEventListener('transitionend', function onEnd() {
+          el.style.willChange = 'auto';
+          el.removeEventListener('transitionend', onEnd);
+        });
         io.unobserve(el);
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
@@ -165,6 +241,13 @@
     var caption = document.getElementById('chapter-caption');
     var navHidden = window.innerWidth < 720;
     var ticking = false;
+    var lastActive = -1, lastNavLight = null;
+
+    // Hint the compositor up front so the scroll-linked hero fade and the
+    // parallax glows live on their own GPU layers — this is what makes
+    // scrolling past the hero (and through every section) feel smooth.
+    if (heroFade) heroFade.style.willChange = 'opacity, transform';
+    parE.forEach(function (el) { el.style.willChange = 'transform'; });
 
     function onScroll() {
       if (ticking) return;
@@ -175,9 +258,13 @@
         var docH = (document.documentElement.scrollHeight - vh) || 1;
         if (progress) progress.style.transform = 'scaleX(' + Math.min(1, Math.max(0, sc / docH)) + ')';
         if (heroFade) {
-          var hp = Math.min(1, Math.max(0, sc / (vh * 0.82)));
-          heroFade.style.opacity = (1 - hp * 0.96).toFixed(3);
-          heroFade.style.transform = 'translateY(' + (hp * -64).toFixed(1) + 'px)';
+          // Fade across a slightly longer scroll distance and run it through a
+          // smoothstep curve so the hero eases out gracefully instead of
+          // dropping off linearly. translate3d keeps it on the GPU layer.
+          var hp = Math.min(1, Math.max(0, sc / (vh * 1.02)));
+          var eased = hp * hp * (3 - 2 * hp);
+          heroFade.style.opacity = (1 - eased).toFixed(3);
+          heroFade.style.transform = 'translate3d(0,' + (eased * -46).toFixed(1) + 'px,0)';
         }
         if (!prefersReduced) {
           parE.forEach(function (el) {
@@ -203,9 +290,11 @@
           if (caption.textContent !== lbl) caption.textContent = lbl;
           caption.style.opacity = lbl ? '1' : '0';
         }
-        // the chapter rail is display:none under 720px — skip its per-frame
-        // restyle entirely on phones.
-        if (!navHidden) {
+        // the chapter rail is display:none under 720px — skip its restyle
+        // entirely on phones. Otherwise only repaint the dots when the active
+        // chapter or its colour theme actually changes, not on every frame.
+        if (!navHidden && (active !== lastActive || navLight !== lastNavLight)) {
+          lastActive = active; lastNavLight = navLight;
           // adapt the tracker's colours to the section behind it so it stays
           // visible on the cream sections (light dots were invisible there).
           var accent = navLight ? '#a23f24' : '#c89a3e';
@@ -230,7 +319,7 @@
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', function () { navHidden = window.innerWidth < 720; onScroll(); });
+    window.addEventListener('resize', function () { navHidden = window.innerWidth < 720; lastActive = -1; onScroll(); });
     onScroll();
   }
 

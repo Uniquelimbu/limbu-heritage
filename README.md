@@ -68,5 +68,5 @@ placeholders. To drop in real photographs, see [`images/README.md`](images/READM
 Content drawn from Kirat & Limbu scholarship, oral tradition, and the Mundhum.
 Made for education and community pride. Fonts: Marcellus, Hanken Grotesk, Space Mono,
 and Noto Sans Limbu (Google Fonts). The map of Nepal is built from the
-[mesaugat/geoJSON-Nepal](https://github.com/mesaugat/geoJSON-Nepal) district-boundary
+[Acesmndr/nepal-geojson](https://github.com/Acesmndr/nepal-geojson) district-boundary
 dataset — see `tools/build-nepal-map.py`.

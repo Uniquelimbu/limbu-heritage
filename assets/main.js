@@ -54,13 +54,41 @@
     setupDrum();
   }
 
-  /* ---- 29 Kirat Hang: data + bars ---- */
-  var KNOWN = {
-    1:  { name: 'Yalambar',  title: 'Yelung Hang · The Founder', desc: 'First king of the Kirat dynasty. Tradition identifies him with the Yalambar of the Mahabharata, said to have marched to the field of Kurukshetra.' },
-    3:  { name: 'Humati',    title: 'Humati Hang',        desc: 'Remembered for shaping the dynasty’s earliest rudimentary legal codes.' },
-    7:  { name: 'Jitedasti', title: 'Jitedasti Hang',     desc: 'Limbu chronicles record that Gautama Buddha visited the Kathmandu valley during his reign.' },
-    11: { name: 'Sthunko',   title: 'Sthunko Hang',       desc: 'Said to have ruled when the Mauryan emperor Ashoka journeyed to the valley.' },
-    29: { name: 'Gasti',     title: 'Gasti Hang · The Last', desc: 'The twenty-ninth and final Kirat king, overthrown by the rising Licchavi dynasty around the 4th century CE.' }
+  /* ---- 29 Kirat Hang: data + bars ----
+     Full dynasty after Wikipedia's "List of Kirati kings". Every Hang is now
+     named; `landmark` flags the reigns that anchor the timeline (founding,
+     the Buddha, Ashoka, the flight and the fall) — only those get a tall,
+     gold, labelled bar so the rail stays legible. */
+  var KINGS = {
+    1:  { name: 'Yalambar',  title: 'Yellung Hang · The Founder', landmark: true, desc: 'First king of the Kirat dynasty. He defeated Bhuban Singh in battle and made Matatirtha his capital; tradition links him to the Yalambar of the Mahabharata.' },
+    2:  { name: 'Pabi',      title: 'Pari Hang',      desc: 'Son of Yalambar.' },
+    3:  { name: 'Skandhara', title: 'Skandhar Hang',  desc: 'Son of Pabi.' },
+    4:  { name: 'Balamba',   title: 'Balamba Hang',   desc: 'Son of Skandhara.' },
+    5:  { name: 'Hriti',     title: 'Hriti Hang',     desc: 'Son of Balamba.' },
+    6:  { name: 'Humati',    title: 'Humati Hang',    desc: 'Son of Hriti.' },
+    7:  { name: 'Jitedasti', title: 'Jitedasti Hang', landmark: true, desc: 'Son of Humati. Limbu chronicles record that the Buddha visited the Kathmandu valley during his reign.' },
+    8:  { name: 'Gali',      title: 'Galinja Hang',   desc: 'Son of Jitedasti.' },
+    9:  { name: 'Pushka',    title: 'Oysgja Hang',    desc: 'Son of Gali.' },
+    10: { name: 'Suyarma',   title: 'Suyarma Hang',   desc: 'Son of Pushka.' },
+    11: { name: 'Parba',     title: 'Papa Hang',      desc: 'Son of Suyarma.' },
+    12: { name: 'Bunka',     title: 'Bunka Hang',     desc: 'Son of Parba.' },
+    13: { name: 'Swananda',  title: 'Swawnanda Hang', desc: 'Son of Bunka.' },
+    14: { name: 'Sthunko',   title: 'Sthunko Hang',   landmark: true, desc: 'Son of Swananda. He is said to have ruled when the Mauryan emperor Ashoka journeyed to the Kathmandu valley.' },
+    15: { name: 'Gighri',    title: 'Jinghri Hang',   desc: 'Son of Sthunko.' },
+    16: { name: 'Nane',      title: 'Nane Hang',      desc: 'Son of Gighri.' },
+    17: { name: 'Luk',       title: 'Luka Hang',      desc: 'Son of Nane.' },
+    18: { name: 'Thor',      title: 'Thor Hang',      desc: 'Son of Luk.' },
+    19: { name: 'Thoko',     title: 'Thoko Hang',     desc: 'Son of Thor.' },
+    20: { name: 'Barma',     title: 'Verma Hang',     desc: 'Son of Thoko.' },
+    21: { name: 'Guja',      title: 'Guja Hang',      desc: 'Son of Barma.' },
+    22: { name: 'Pushkar',   title: 'Pushkar Hang',   desc: 'Son of Guja.' },
+    23: { name: 'Kesu',      title: 'Keshu Hang',     desc: 'Son of Pushkar.' },
+    24: { name: 'Suga',      title: 'Suja Hang',      desc: 'Son of Kesu.' },
+    25: { name: 'Sansa',     title: 'Sansa Hang',     desc: 'Son of Suga.' },
+    26: { name: 'Gunam',     title: 'Gunam Hang',     desc: 'Son of Sansa.' },
+    27: { name: 'Khimbu',    title: 'Khimbu Hang',    desc: 'Son of Gunam.' },
+    28: { name: 'Patuka',    title: 'Paruka Hang',    landmark: true, desc: 'Son of Khimbu. As invasions pressed in he fled to Sankhamul, and the dynasty began to fail.' },
+    29: { name: 'Gasti',     title: 'Gasti Hang · The Last', landmark: true, desc: 'The twenty-ninth and final Kirat king, son of Patuka, defeated by Nimisha of the Soma dynasty around the 4th century CE.' }
   };
 
   function buildKings() {
@@ -69,12 +97,11 @@
     var frag = document.createDocumentFragment();
     for (var i = 1; i <= 29; i++) {
       var num = String(i).padStart(2, '0');
-      var k = KNOWN[i];
-      var isKnown = !!k;
-      var name = isKnown ? k.name : 'Hang ' + i;
-      var title = isKnown ? k.title : 'Reign unrecorded';
-      var desc = isKnown ? k.desc
-        : 'One of the twenty-nine Kirat Hang whose rule shaped the land even as the chronicles let the name slip away.';
+      var k = KINGS[i];
+      var landmark = !!k.landmark;
+      var name = k.name;
+      var title = k.title;
+      var desc = k.desc;
 
       var btn = document.createElement('button');
       btn.type = 'button';
@@ -82,13 +109,13 @@
       btn.setAttribute('data-name', name);
       btn.setAttribute('data-title', title);
       btn.setAttribute('data-desc', desc);
-      btn.setAttribute('data-known', isKnown ? 'yes' : 'no');
+      btn.setAttribute('data-landmark', landmark ? 'yes' : 'no');
       btn.setAttribute('data-num', num);
       btn.setAttribute('aria-label', name + ' — ' + title);
       btn.tabIndex = i === 1 ? 0 : -1; // roving tabindex
       btn.style.cssText = 'flex:1 1 0;min-width:16px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:8px;cursor:pointer;background:none;border:0;padding:0';
 
-      if (isKnown) {
+      if (landmark) {
         var nm = document.createElement('span');
         nm.setAttribute('data-king-name', '');
         nm.textContent = name;
@@ -509,7 +536,7 @@
     var knum = kd.querySelector('[data-kd-num]');
 
     function styleBar(x, on) {
-      var hi = x.getAttribute('data-known') === 'yes';
+      var hi = x.getAttribute('data-landmark') === 'yes';
       var bar = x.querySelector('[data-king-bar]');
       var nm = x.querySelector('[data-king-name]');
       if (!bar) return;

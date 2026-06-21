@@ -90,24 +90,27 @@ body {
   .glyph-card .ipa { font-size: 9px; }
 }
 
-/* Limbuwan kings — the recent past, inside the cream Homeland section */
+/* Limbuwan kings — the era of ten kings, inside the cream Homeland section */
 .lim-sublabel {
   font-family: 'Space Mono', monospace;
   font-size: 11px;
   letter-spacing: .16em;
   text-transform: uppercase;
   color: rgba(36, 24, 17, .55);
-  margin: 0 0 18px;
+  margin: 0 0 20px;
 }
 .lim-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 14px;
 }
 .lim-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 130px;
   padding: 16px 18px;
   border: 1px solid rgba(36, 24, 17, .14);
-  border-radius: 12px;
+  border-radius: 13px;
   background: rgba(255, 250, 238, .45);
   transition: transform .3s cubic-bezier(.16, .85, .3, 1), border-color .3s, box-shadow .3s;
 }
@@ -116,12 +119,13 @@ body {
   border-color: rgba(161, 66, 39, .5);
   box-shadow: 0 14px 30px rgba(60, 40, 22, .16);
 }
-.lim-card .terr { font-family: 'Marcellus', serif; font-size: 20px; color: #241811; margin-bottom: 4px; }
-.lim-card .king { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .03em; color: #a14227; line-height: 1.5; }
-.lim-card .cap { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(36, 24, 17, .5); margin-top: 9px; }
+.lim-card .idx { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: rgba(161, 66, 39, .6); margin-bottom: 10px; }
+.lim-card .king-name { font-family: 'Marcellus', serif; font-size: 18px; line-height: 1.16; color: #241811; margin-bottom: 6px; }
+.lim-card .realm { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .02em; color: #a14227; }
+.lim-card .cap { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(36, 24, 17, .5); margin-top: auto; padding-top: 12px; }
 
-.lim-time { border-left: 2px solid rgba(161, 66, 39, .35); margin: 0; padding: 0; list-style: none; }
-.lim-time li { position: relative; padding: 0 0 clamp(22px, 3vw, 32px) clamp(22px, 3vw, 34px); }
+.lim-time { border-left: 2px solid rgba(161, 66, 39, .3); margin: 0; padding: 0; list-style: none; }
+.lim-time li { position: relative; padding: 0 0 clamp(22px, 3vw, 32px) clamp(24px, 3vw, 36px); }
 .lim-time li:last-child { padding-bottom: 0; }
 .lim-time li::before {
   content: ''; position: absolute; left: -7px; top: 5px;
@@ -129,14 +133,21 @@ body {
   background: #e7dcc4; border: 2px solid #a14227;
 }
 .lim-time li.is-fall::before { background: #a14227; }
-.lim-time .yr { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #a14227; }
+.lim-time li.lim-era { padding-top: clamp(18px, 2.6vw, 30px); padding-bottom: clamp(14px, 2vw, 20px); }
+.lim-time li.lim-era:first-child { padding-top: 0; }
+.lim-time li.lim-era::before {
+  left: -8px; top: 3px; width: 15px; height: 15px;
+  border-radius: 2px; border: none; background: #a14227; transform: rotate(45deg);
+}
+.lim-time .era { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; color: #a14227; }
+.lim-time .yr { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(161, 66, 39, .85); }
 .lim-time .ev { font-family: 'Marcellus', serif; font-size: clamp(18px, 2.1vw, 24px); color: #241811; margin: 3px 0 5px; }
 .lim-time .nt { font-size: clamp(14px, 1.5vw, 16px); line-height: 1.65; color: rgba(36, 24, 17, .76); max-width: 640px; text-wrap: pretty; }
 
 @media (max-width: 520px) {
   .lim-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
-  .lim-card { padding: 13px 14px; }
-  .lim-card .terr { font-size: 18px; }
+  .lim-card { min-height: 116px; padding: 13px 14px; }
+  .lim-card .king-name { font-size: 16px; }
 }
 
 /* ---------- keyframes ---------- */

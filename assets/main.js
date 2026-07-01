@@ -23,6 +23,9 @@
   }
 
   function boot() {
+    // Signal the inline head failsafe that the script is live and owns
+    // revealing content, so it doesn't hard-reveal on top of us.
+    window.__limbuReady = true;
     try {
       wire();
     } catch (err) {

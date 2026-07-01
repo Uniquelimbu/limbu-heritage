@@ -168,6 +168,34 @@ body {
 @keyframes scriptIn { 0% { opacity: 0; filter: blur(14px); letter-spacing: .4em; transform: translateY(26px); } 100% { opacity: 1; filter: blur(0); letter-spacing: .02em; transform: translateY(0); } }
 @keyframes scriptGlow { 0%, 100% { text-shadow: 0 0 26px rgba(232,192,105,.18); } 50% { text-shadow: 0 0 46px rgba(232,192,105,.42); } }
 
+/* ---------- scroll-reveal ----------
+   Elements start hidden; assets/main.js sets inline opacity:1 / transform:none
+   when they enter the viewport (or the head failsafe / reduced-motion / noscript
+   rules reveal them). These classes replace ~50 repeated inline recipes. */
+[data-reveal] { will-change: opacity, transform; }
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 1.05s cubic-bezier(.16,.85,.3,1),
+              transform 1.05s cubic-bezier(.16,.85,.3,1);
+}
+.reveal-fade { opacity: 0; transition: opacity 1.05s ease; }
+
+/* ---------- section number badge (the "01 — The homeland" eyebrow) ---------- */
+.section-tag { display: flex; align-items: center; gap: 18px; margin-bottom: 40px; }
+.section-tag--center { justify-content: center; }
+.section-tag__num {
+  font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .3em; color: #c89a3e;
+}
+.section-tag__rule { width: 52px; height: 1px; background: rgba(200,154,62,.5); }
+.section-tag__label {
+  font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .3em;
+  text-transform: uppercase; color: rgba(236,225,205,.6);
+}
+.section-tag--cream .section-tag__num { color: #a14227; }
+.section-tag--cream .section-tag__rule { background: rgba(161,66,39,.5); }
+.section-tag--cream .section-tag__label { color: rgba(36,24,17,.74); }
+
 /* ---------- interactive element focus (keyboard a11y) ---------- */
 [data-navdot]:focus-visible,
 [data-king]:focus-visible,

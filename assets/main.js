@@ -55,7 +55,6 @@
     setupGlossary();
     setupDistricts();
     setupKingsInteraction();
-    setupDrum();
   }
 
   /* ---- 29 Kirat Hang: data + bars ----
@@ -607,87 +606,6 @@
       });
     });
     show(kings[0]);
-  }
-
-  /* ---- Chyabhrung drum (Web Audio) ---- */
-  function setupDrum() {
-    var btn = document.getElementById('audio-toggle');
-    var disc = document.getElementById('audio-disc');
-    var label = document.getElementById('audio-label');
-    var danceBtn = document.getElementById('dance-audio-cue');
-    if (!btn) return;
-
-    var drumOn = false;
-    var actx = null, master = null, timer = null;
-
-    function ensureCtx() {
-      if (!actx) {
-        var AC = window.AudioContext || window.webkitAudioContext;
-        if (!AC) return false;
-        actx = new AC();
-        master = actx.createGain();
-        master.gain.value = 0.0001;
-        master.connect(actx.destination);
-      }
-      if (actx.state === 'suspended') actx.resume();
-      return true;
-    }
-    function noise(t, dur, gain, hp) {
-      var n = Math.max(1, Math.floor(actx.sampleRate * dur));
-      var buf = actx.createBuffer(1, n, actx.sampleRate);
-      var d = buf.getChannelData(0);
-      for (var i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 2);
-      var src = actx.createBufferSource(); src.buffer = buf;
-      var f = actx.createBiquadFilter(); f.type = 'highpass'; f.frequency.value = hp;
-      var g = actx.createGain(); g.gain.value = gain;
-      src.connect(f); f.connect(g); g.connect(master); src.start(t);
-    }
-    function tone(t, freq, dur, gain) {
-      var o = actx.createOscillator(); var g = actx.createGain();
-      o.type = 'sine'; o.frequency.setValueAtTime(freq, t);
-      o.frequency.exponentialRampToValueAtTime(Math.max(38, freq * 0.5), t + dur);
-      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(gain, t + 0.005);
-      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-      o.connect(g); g.connect(master); o.start(t); o.stop(t + dur + 0.03);
-    }
-    function low(t, v) { tone(t, 96, 0.34, 0.5 * v); noise(t, 0.11, 0.1 * v, 120); }
-    function high(t, v) { noise(t, 0.07, 0.18 * v, 2200); tone(t, 300, 0.07, 0.1 * v); }
-    function loop() {
-      if (!drumOn) return;
-      var sp = 0.34, t0 = actx.currentTime + 0.06;
-      [0, 3, 6].forEach(function (i) { low(t0 + i * sp, i === 0 ? 1 : 0.78); });
-      [2, 4, 5, 7].forEach(function (i) { high(t0 + i * sp, i === 4 ? 0.95 : 0.6); });
-      timer = setTimeout(loop, 8 * sp * 1000 - 28);
-    }
-    function start() {
-      if (!ensureCtx()) return;
-      drumOn = true;
-      master.gain.cancelScheduledValues(actx.currentTime);
-      master.gain.setTargetAtTime(0.22, actx.currentTime, 0.2);
-      loop();
-      if (disc && !prefersReduced) disc.style.animation = 'drumPulse 0.85s ease-in-out infinite';
-      if (label) label.textContent = 'Chyabhrung ▪ stop';
-      btn.style.borderColor = 'rgba(200,154,62,.85)';
-      btn.setAttribute('aria-pressed', 'true');
-      btn.setAttribute('aria-label', 'Stop the Chyabhrung drum');
-      if (danceBtn) { danceBtn.setAttribute('aria-pressed', 'true'); danceBtn.textContent = '▪ Stop the drum'; }
-    }
-    function stop() {
-      drumOn = false;
-      if (timer) { clearTimeout(timer); timer = null; }
-      if (master && actx) master.gain.setTargetAtTime(0.0001, actx.currentTime, 0.15);
-      if (disc) disc.style.animation = 'none';
-      if (label) label.textContent = 'Chyabhrung ▸ play';
-      btn.style.borderColor = 'rgba(200,154,62,.4)';
-      btn.setAttribute('aria-pressed', 'false');
-      btn.setAttribute('aria-label', 'Play the Chyabhrung drum');
-      if (danceBtn) { danceBtn.setAttribute('aria-pressed', 'false'); danceBtn.textContent = '▸ Hear the drum'; }
-    }
-    function toggle() { if (drumOn) stop(); else start(); }
-
-    btn.addEventListener('click', toggle);
-    if (danceBtn) danceBtn.addEventListener('click', toggle);
-    window.addEventListener('pagehide', stop);
   }
 
   // Kick everything off once the DOM is ready. Declared functions and the

@@ -164,7 +164,6 @@ body {
 /* ---------- keyframes ---------- */
 @keyframes floatDust { 0% { transform: translateY(0); opacity: 0; } 12% { opacity: .6; } 60% { opacity: .7; } 100% { transform: translateY(-90px); opacity: 0; } }
 @keyframes emberRise { 0% { transform: translate3d(0,0,0) scale(1); opacity: 0; } 12% { opacity: 1; } 65% { opacity: .8; } 100% { transform: translate3d(var(--sx,0), var(--sy,-200px), 0) scale(.3); opacity: 0; } }
-@keyframes drumPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 @keyframes scriptIn { 0% { opacity: 0; filter: blur(14px); letter-spacing: .4em; transform: translateY(26px); } 100% { opacity: 1; filter: blur(0); letter-spacing: .02em; transform: translateY(0); } }
 @keyframes scriptGlow { 0%, 100% { text-shadow: 0 0 26px rgba(232,192,105,.18); } 50% { text-shadow: 0 0 46px rgba(232,192,105,.42); } }
 
@@ -296,17 +295,16 @@ nav[data-chapnav] [data-navdot]:focus-visible [data-navlabel] {
 }
 
 /* ---------- touch polish ---------- */
-a, button, [data-navdot], [data-king], [data-term], [data-district], .district-chip,
-#audio-toggle, #dance-audio-cue {
+a, button, [data-navdot], [data-king], [data-term], [data-district], .district-chip {
   -webkit-tap-highlight-color: rgba(200,154,62,.22);
 }
 /* manipulation suppresses double-tap-zoom; the kings rail is excluded so a
    horizontal swipe still scrolls it. */
-[data-term], [data-district], .district-chip, #audio-toggle, #dance-audio-cue {
+[data-term], [data-district], .district-chip {
   touch-action: manipulation;
 }
 [data-term]:active, [data-district]:active, .district-chip:active,
-#audio-toggle:active, #dance-audio-cue:active, [data-navdot]:active { opacity: .65; }
+[data-navdot]:active { opacity: .65; }
 
 /* mobile chapter caption — current section name, top-left (revealed under 720px) */
 #chapter-caption {
@@ -413,13 +411,6 @@ a, button, [data-navdot], [data-king], [data-term], [data-district], .district-c
     bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
     max-width: none !important;
   }
-  /* compact icon audio button, clear of the glossary sheet and the notch */
-  #audio-toggle {
-    bottom: auto !important;
-    top: calc(14px + env(safe-area-inset-top, 0px)) !important;
-    padding: 9px !important;
-  }
-  #audio-label { display: none; }
   /* the .05-opacity blended grain isn't worth its per-scroll-frame cost here */
   [data-grain] { display: none; }
 }

@@ -54,7 +54,6 @@ nothing to build; point the host at the repo root and it serves `index.html`.
 - **The 29 Hang** — an interactive timeline of the Kirat kings (hover, tap, or arrow-key).
 - **Limbuwan map** — an SVG of Nepal's nine eastern districts you can hover/tap to explore.
 - **Glossary** — dashed terms reveal a definition on hover, tap, or keyboard focus.
-- **Chyabhrung drum** — a Web Audio drum pattern you can toggle on.
 - **Accessible & considerate** — keyboard support throughout, ARIA labels, and full
   `prefers-reduced-motion` handling (animations and parallax switch off automatically).
 

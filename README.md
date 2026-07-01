@@ -57,6 +57,11 @@ nothing to build; point the host at the repo root and it serves `index.html`.
 - **Chyabhrung drum** — a Web Audio drum pattern you can toggle on.
 - **Accessible & considerate** — keyboard support throughout, ARIA labels, and full
   `prefers-reduced-motion` handling (animations and parallax switch off automatically).
+- **Degrades gracefully** — section content is revealed by JavaScript, but if the
+  script is disabled, blocked, or fails to load, a `<noscript>` rule and an inline
+  head failsafe reveal everything so the page is never left blank.
+- **Link previews** — Open Graph / Twitter card metadata and a generated share
+  image (`images/og-cover.png`) so shared links unfurl with a proper preview.
 
 ## Images
 

@@ -9,10 +9,40 @@
 <meta property="og:title" content="Yakthung · Limbu Heritage">
 <meta property="og:description" content="An interactive journey through Limbu (Yakthung) history, faith and living culture.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="images/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="YAKTHUNG — Limbu Heritage">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Yakthung · Limbu Heritage">
+<meta name="twitter:description" content="An interactive journey through Limbu (Yakthung) history, faith and living culture.">
+<meta name="twitter:image" content="images/og-cover.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+Limbu&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231c140f'/%3E%3Ccircle cx='16' cy='16' r='8.5' fill='none' stroke='%23c89a3e' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23b14a30'/%3E%3C/svg%3E">
+<!-- The section content is hidden (opacity:0) and revealed by assets/main.js.
+     If that script is disabled, these fallbacks keep the page from rendering blank. -->
+<noscript><style>[data-reveal]{opacity:1!important;transform:none!important;filter:none!important}</style></noscript>
+<script>
+  /* Failsafe: if main.js is blocked, 404s, or throws before it runs, reveal
+     every [data-reveal] so the landing page is never left invisible. Skipped
+     when main.js has already booted (it sets window.__limbuReady). */
+  (function () {
+    window.addEventListener('DOMContentLoaded', function () {
+      setTimeout(function () {
+        if (window.__limbuReady) return;
+        var els = document.querySelectorAll('[data-reveal]');
+        for (var i = 0; i < els.length; i++) {
+          els[i].style.opacity = '1';
+          els[i].style.transform = 'none';
+          els[i].style.filter = 'none';
+        }
+      }, 1800);
+    });
+  })();
+</script>
 </head>
 <body>
 <div data-root style="position:relative;background:#1c140f;color:#ece1cd;overflow-x:hidden">
@@ -105,11 +135,11 @@
     </div>
     <div data-dust style="position:absolute;inset:0;z-index:1;pointer-events:none"></div>
     <div data-herofade style="position:relative;z-index:2;text-align:center;padding:0 26px;max-width:1040px">
-      <div data-reveal style="opacity:0;transform:translateY(20px);transition:all 1s cubic-bezier(.16,.85,.3,1);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.42em;text-transform:uppercase;color:#c89a3e;margin-bottom:30px">Kirat · Yakthung · Limbuwan</div>
+      <div class="reveal" data-reveal style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.42em;text-transform:uppercase;color:#c89a3e;margin-bottom:30px">Kirat · Yakthung · Limbuwan</div>
       <div class="limbu" lang="lif" style="font-family:'Noto Sans Limbu',serif;font-size:clamp(64px,13.5vw,184px);line-height:.96;color:#f1e3c8;animation:scriptIn 1.9s cubic-bezier(.16,.85,.3,1) both,scriptGlow 7s ease-in-out 2s infinite">ᤕᤠᤰᤌᤢᤱᤒᤠ</div>
-      <h1 data-reveal data-reveal-delay="260" style="opacity:0;transform:translateY(22px);transition:all 1.1s cubic-bezier(.16,.85,.3,1);font-family:'Marcellus',serif;font-weight:400;font-size:clamp(30px,5.4vw,68px);letter-spacing:.24em;margin:18px 0 0;color:#ece1cd">YAKTHUNG</h1>
-      <p data-reveal data-reveal-delay="420" style="opacity:0;transform:translateY(22px);transition:all 1.1s cubic-bezier(.16,.85,.3,1);max-width:620px;margin:26px auto 0;font-size:clamp(15px,1.7vw,19px);line-height:1.7;color:rgba(236,225,205,.78);text-wrap:pretty">The Limbu people of the eastern Himalaya, keepers of the <span data-term="Mundhum" data-def="The vast oral scripture of the Limbu. Its name means “the power of great strength.” It holds creation, genealogy, ritual and law, carried entirely by voice." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Mundhum</span>, archers of the hills, children of the grandmother goddess.</p>
-      <div data-reveal data-reveal-delay="560" style="opacity:0;transition:all 1.1s ease;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:rgba(236,225,205,.62);margin-top:30px">written in Sirijunga, the indigenous script of the Limbu</div>
+      <h1 class="reveal" data-reveal data-reveal-delay="260" style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(30px,5.4vw,68px);letter-spacing:.24em;margin:18px 0 0;color:#ece1cd">YAKTHUNG</h1>
+      <p class="reveal" data-reveal data-reveal-delay="420" style="max-width:620px;margin:26px auto 0;font-size:clamp(15px,1.7vw,19px);line-height:1.7;color:rgba(236,225,205,.78);text-wrap:pretty">The Limbu people of the eastern Himalaya, keepers of the <span data-term="Mundhum" data-def="The vast oral scripture of the Limbu. Its name means “the power of great strength.” It holds creation, genealogy, ritual and law, carried entirely by voice." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Mundhum</span>, archers of the hills, children of the grandmother goddess.</p>
+      <div class="reveal-fade" data-reveal data-reveal-delay="560" style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:rgba(236,225,205,.62);margin-top:30px">written in Sirijunga, the indigenous script of the Limbu</div>
     </div>
   </section>
 
@@ -117,17 +147,17 @@
   <section id="sec-origins" data-chapter data-screen-label="Origins" style="position:relative;padding:clamp(110px,16vh,200px) clamp(26px,7vw,150px)">
     <div data-parallax="0.05" aria-hidden="true" style="position:absolute;top:8%;right:-4%;width:min(46vw,560px);height:min(46vw,560px);border-radius:50%;background:radial-gradient(circle,rgba(177,74,48,.16),transparent 68%);pointer-events:none"></div>
     <div style="max-width:1140px;margin:0 auto">
-      <div data-reveal style="opacity:0;transform:translateY(28px);transition:all 1s cubic-bezier(.16,.85,.3,1);display:flex;align-items:center;gap:18px;margin-bottom:44px">
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;color:#c89a3e">01</span>
-        <span style="width:52px;height:1px;background:rgba(200,154,62,.5)"></span>
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:rgba(236,225,205,.6)">Origins &amp; the Mundhum</span>
+      <div class="reveal section-tag" data-reveal>
+        <span class="section-tag__num">01</span>
+        <span class="section-tag__rule"></span>
+        <span class="section-tag__label">Origins &amp; the Mundhum</span>
       </div>
-      <h2 data-reveal data-reveal-delay="120" style="opacity:0;transform:translateY(30px);transition:all 1.05s cubic-bezier(.16,.85,.3,1);font-family:'Marcellus',serif;font-weight:400;font-size:clamp(34px,5.6vw,76px);line-height:1.06;margin:0 0 38px;max-width:16ch;text-wrap:balance">Before the written word, there was the voice.</h2>
+      <h2 class="reveal" data-reveal data-reveal-delay="120" style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(34px,5.6vw,76px);line-height:1.06;margin:0 0 38px;max-width:16ch;text-wrap:balance">Before the written word, there was the voice.</h2>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:clamp(28px,4vw,60px);align-items:start">
-        <p data-reveal data-reveal-delay="200" style="opacity:0;transform:translateY(26px);transition:all 1.05s cubic-bezier(.16,.85,.3,1);font-size:clamp(15px,1.6vw,18px);line-height:1.78;color:rgba(236,225,205,.82);margin:0;text-wrap:pretty">The Limbu, who call themselves <span data-term="Yakthung" data-def="The Limbu endonym. In their own language it reads as “heroes of the hills”, yak (hills) and thung (mighty ones)." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Yakthung</span>, are among the oldest of the <span data-term="Kirat" data-def="An ancient Himalayan civilisation and ethnic identity. The Limbu, along with the Rai and others, descend from the Kirati peoples who once ruled the central hills of Nepal." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Kirat</span> peoples. Their cosmos was sung into being long before any script, recited at births, at harvests, and beside the dead.</p>
-        <p data-reveal data-reveal-delay="300" style="opacity:0;transform:translateY(26px);transition:all 1.05s cubic-bezier(.16,.85,.3,1);font-size:clamp(15px,1.6vw,18px);line-height:1.78;color:rgba(236,225,205,.82);margin:0;text-wrap:pretty">In the creation narratives, the supreme mind <strong style="color:#e7c87f;font-weight:600">Tagera Ningwabhu Mang</strong> imagined the universe into form, and the grandmother goddess <span data-term="Yuma Sammang" data-def="“Mother Earth” or “Grandmother”, the central deity of the Limbu, source of fertility, protection and the household itself." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Yuma Sammang</span> gave it warmth. To be Limbu is to believe that a soul dwells in every river, stone and tree.</p>
+        <p class="reveal" data-reveal data-reveal-delay="200" style="font-size:clamp(15px,1.6vw,18px);line-height:1.78;color:rgba(236,225,205,.82);margin:0;text-wrap:pretty">The Limbu, who call themselves <span data-term="Yakthung" data-def="The Limbu endonym. In their own language it reads as “heroes of the hills”, yak (hills) and thung (mighty ones)." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Yakthung</span>, are among the oldest of the <span data-term="Kirat" data-def="An ancient Himalayan civilisation and ethnic identity. The Limbu, along with the Rai and others, descend from the Kirati peoples who once ruled the central hills of Nepal." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Kirat</span> peoples. Their cosmos was sung into being long before any script, recited at births, at harvests, and beside the dead.</p>
+        <p class="reveal" data-reveal data-reveal-delay="300" style="font-size:clamp(15px,1.6vw,18px);line-height:1.78;color:rgba(236,225,205,.82);margin:0;text-wrap:pretty">In the creation narratives, the supreme mind <strong style="color:#e7c87f;font-weight:600">Tagera Ningwabhu Mang</strong> imagined the universe into form, and the grandmother goddess <span data-term="Yuma Sammang" data-def="“Mother Earth” or “Grandmother”, the central deity of the Limbu, source of fertility, protection and the household itself." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Yuma Sammang</span> gave it warmth. To be Limbu is to believe that a soul dwells in every river, stone and tree.</p>
       </div>
-      <blockquote data-reveal data-reveal-delay="200" style="opacity:0;transform:translateY(30px);transition:all 1.1s cubic-bezier(.16,.85,.3,1);margin:clamp(56px,8vw,96px) 0 0;padding-left:clamp(20px,3vw,40px);border-left:2px solid rgba(200,154,62,.55);max-width:900px">
+      <blockquote class="reveal" data-reveal data-reveal-delay="200" style="margin:clamp(56px,8vw,96px) 0 0;padding-left:clamp(20px,3vw,40px);border-left:2px solid rgba(200,154,62,.55);max-width:900px">
         <p style="font-family:'Marcellus',serif;font-size:clamp(24px,3.4vw,44px);line-height:1.28;color:#f1e3c8;margin:0;font-style:italic;text-wrap:balance">“The lost songs continue to resonate in the air. The question is simply, are we ready to listen?”</p>
       </blockquote>
     </div>
@@ -136,13 +166,13 @@
   <!-- ============ 02 THE 29 HANG (kings timeline) ============ -->
   <section id="sec-kings" data-chapter data-screen-label="The 29 Hang" style="position:relative;padding:clamp(110px,16vh,190px) clamp(26px,6vw,110px);background:#160f0a">
     <div style="max-width:1240px;margin:0 auto">
-      <div data-reveal style="opacity:0;transform:translateY(28px);transition:all 1s cubic-bezier(.16,.85,.3,1);display:flex;align-items:center;gap:18px;margin-bottom:36px">
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;color:#c89a3e">02</span>
-        <span style="width:52px;height:1px;background:rgba(200,154,62,.5)"></span>
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:rgba(236,225,205,.6)">The Kirat dynasty</span>
+      <div class="reveal section-tag" data-reveal>
+        <span class="section-tag__num">02</span>
+        <span class="section-tag__rule"></span>
+        <span class="section-tag__label">The Kirat dynasty</span>
       </div>
-      <h2 data-reveal data-reveal-delay="120" style="opacity:0;transform:translateY(30px);transition:all 1.05s cubic-bezier(.16,.85,.3,1);font-family:'Marcellus',serif;font-weight:400;font-size:clamp(34px,5.6vw,76px);line-height:1.05;margin:0 0 16px">Twenty-nine kings, one long dawn.</h2>
-      <p data-reveal data-reveal-delay="200" style="opacity:0;transform:translateY(24px);transition:all 1s cubic-bezier(.16,.85,.3,1);max-width:680px;font-size:clamp(15px,1.6vw,18px);line-height:1.7;color:rgba(236,225,205,.78);margin:0 0 52px">For roughly a thousand years the Kirat <span data-term="Hang" data-def="“King” in the Limbu language. Each Hang ruled a clan-based hill polity within the wider Kirat realm." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Hang</span> ruled the hills of Nepal, until the Licchavi rose in the 4th century CE. Hover, or swipe and tap, to meet the ones history still remembers.</p>
+      <h2 class="reveal" data-reveal data-reveal-delay="120" style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(34px,5.6vw,76px);line-height:1.05;margin:0 0 16px">Twenty-nine kings, one long dawn.</h2>
+      <p class="reveal" data-reveal data-reveal-delay="200" style="max-width:680px;font-size:clamp(15px,1.6vw,18px);line-height:1.7;color:rgba(236,225,205,.78);margin:0 0 52px">For roughly a thousand years the Kirat <span data-term="Hang" data-def="“King” in the Limbu language. Each Hang ruled a clan-based hill polity within the wider Kirat realm." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Hang</span> ruled the hills of Nepal, until the Licchavi rose in the 4th century CE. Hover, or swipe and tap, to meet the ones history still remembers.</p>
 
       <!-- detail card -->
       <div id="king-detail" style="display:flex;gap:clamp(22px,3.4vw,46px);align-items:center;flex-wrap:wrap;min-height:196px;margin:0 0 18px;padding:clamp(22px,3vw,38px);border:1px solid rgba(200,154,62,.22);border-radius:20px;background:linear-gradient(135deg,rgba(200,154,62,.07),rgba(177,74,48,.04))">
@@ -158,7 +188,7 @@
       </div>
 
       <!-- era timeline -->
-      <div data-reveal data-reveal-delay="160" style="opacity:0;transition:all 1s ease">
+      <div class="reveal-fade" data-reveal data-reveal-delay="160">
         <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(236,225,205,.6);margin-bottom:14px">
           <span>Legendary dawn</span><span style="text-align:center">The long line of Hang</span><span style="text-align:right">The Licchavi fall</span>
         </div>
@@ -175,17 +205,17 @@
   <!-- ============ 03 LIMBUWAN MAP (cream) ============ -->
   <section id="sec-map" data-chapter data-screen-label="Limbuwan" style="position:relative;padding:clamp(110px,16vh,190px) clamp(26px,6vw,110px);background:#e7dcc4;color:#241811">
     <div style="max-width:1240px;margin:0 auto">
-      <div data-reveal style="opacity:0;transform:translateY(28px);transition:all 1s cubic-bezier(.16,.85,.3,1);display:flex;align-items:center;gap:18px;margin-bottom:36px">
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;color:#a14227">03</span>
-        <span style="width:52px;height:1px;background:rgba(161,66,39,.5)"></span>
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:rgba(36,24,17,.74)">The homeland</span>
+      <div class="reveal section-tag section-tag--cream" data-reveal>
+        <span class="section-tag__num">03</span>
+        <span class="section-tag__rule"></span>
+        <span class="section-tag__label">The homeland</span>
       </div>
       <div style="max-width:760px;margin:0 0 clamp(34px,5vw,56px)">
-        <h2 data-reveal data-reveal-delay="120" style="opacity:0;transform:translateY(30px);transition:all 1.05s cubic-bezier(.16,.85,.3,1);font-family:'Marcellus',serif;font-weight:400;font-size:clamp(34px,5.4vw,72px);line-height:1.05;margin:0 0 24px">Limbuwan, the land of the bow-bearers.</h2>
-        <p data-reveal data-reveal-delay="200" style="opacity:0;transform:translateY(24px);transition:all 1s cubic-bezier(.16,.85,.3,1);font-size:clamp(15px,1.6vw,18px);line-height:1.76;color:rgba(36,24,17,.78);text-wrap:pretty;margin:0 0 18px">East of the Arun, between the great river and the snows of Kanchenjunga, lies <span data-term="Limbuwan" data-def="“The land of the Limbu.” The historic homeland of nine self-governing Limbu territories across what is now eastern Nepal, Sikkim and beyond." role="button" tabindex="0" style="border-bottom:1px dashed rgba(161,66,39,.65);cursor:help;color:#8a3420">Limbuwan</span>, once nine self-governing territories, each led by its own Hang.</p>
-        <p data-reveal data-reveal-delay="280" style="opacity:0;transform:translateY(24px);transition:all 1s cubic-bezier(.16,.85,.3,1);font-size:clamp(15px,1.6vw,18px);line-height:1.76;color:rgba(36,24,17,.78);text-wrap:pretty;margin:0">Land here was held not by deed but by <span data-term="Kipat" data-def="A communal land-tenure system unique to the Kirat. Land belonged to the clan and the community, not the individual, a cornerstone of Limbu self-rule." role="button" tabindex="0" style="border-bottom:1px dashed rgba(161,66,39,.65);cursor:help;color:#8a3420">Kipat</span>, belonging to the clan, not the person. Hover or tap an eastern district to walk the hills.</p>
+        <h2 class="reveal" data-reveal data-reveal-delay="120" style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(34px,5.4vw,72px);line-height:1.05;margin:0 0 24px">Limbuwan, the land of the bow-bearers.</h2>
+        <p class="reveal" data-reveal data-reveal-delay="200" style="font-size:clamp(15px,1.6vw,18px);line-height:1.76;color:rgba(36,24,17,.78);text-wrap:pretty;margin:0 0 18px">East of the Arun, between the great river and the snows of Kanchenjunga, lies <span data-term="Limbuwan" data-def="“The land of the Limbu.” The historic homeland of nine self-governing Limbu territories across what is now eastern Nepal, Sikkim and beyond." role="button" tabindex="0" style="border-bottom:1px dashed rgba(161,66,39,.65);cursor:help;color:#8a3420">Limbuwan</span>, once nine self-governing territories, each led by its own Hang.</p>
+        <p class="reveal" data-reveal data-reveal-delay="280" style="font-size:clamp(15px,1.6vw,18px);line-height:1.76;color:rgba(36,24,17,.78);text-wrap:pretty;margin:0">Land here was held not by deed but by <span data-term="Kipat" data-def="A communal land-tenure system unique to the Kirat. Land belonged to the clan and the community, not the individual, a cornerstone of Limbu self-rule." role="button" tabindex="0" style="border-bottom:1px dashed rgba(161,66,39,.65);cursor:help;color:#8a3420">Kipat</span>, belonging to the clan, not the person. Hover or tap an eastern district to walk the hills.</p>
       </div>
-      <div data-reveal data-reveal-delay="160" style="opacity:0;transform:translateY(30px);transition:all 1.1s cubic-bezier(.16,.85,.3,1);position:relative">
+      <div class="reveal" data-reveal data-reveal-delay="160" style="position:relative">
         <div style="position:relative;width:100%;border-radius:18px;background:linear-gradient(160deg,#dacca8,#c3b184);box-shadow:0 24px 60px rgba(60,40,22,.28);border:1px solid rgba(36,24,17,.14);padding:clamp(18px,2.4vw,28px)">
           <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;flex-wrap:wrap;gap:10px">
             <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(36,24,17,.85)">Nepal · Limbuwan in the east</div>
@@ -213,21 +243,21 @@
   <section id="sec-yuma" data-chapter data-screen-label="Yuma Sammang" style="position:relative;padding:clamp(110px,16vh,200px) clamp(26px,7vw,150px);overflow:hidden">
     <div data-parallax="0.06" aria-hidden="true" style="position:absolute;left:50%;top:14%;transform:translateX(-50%);width:min(64vw,720px);height:min(64vw,720px);border-radius:50%;background:radial-gradient(circle,rgba(90,76,120,.22),transparent 66%);pointer-events:none"></div>
     <div style="max-width:1140px;margin:0 auto;position:relative">
-      <div data-reveal style="opacity:0;transform:translateY(28px);transition:all 1s cubic-bezier(.16,.85,.3,1);display:flex;align-items:center;gap:18px;margin-bottom:40px;justify-content:center">
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;color:#c89a3e">04</span>
-        <span style="width:52px;height:1px;background:rgba(200,154,62,.5)"></span>
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:rgba(236,225,205,.6)">The grandmother goddess</span>
+      <div class="reveal section-tag section-tag--center" data-reveal>
+        <span class="section-tag__num">04</span>
+        <span class="section-tag__rule"></span>
+        <span class="section-tag__label">The grandmother goddess</span>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(34px,5vw,72px);align-items:center">
-        <div data-reveal data-reveal-delay="140" style="opacity:0;transform:translateY(30px);transition:all 1.1s cubic-bezier(.16,.85,.3,1);order:2">
+        <div class="reveal" data-reveal data-reveal-delay="140" style="order:2">
           <figure class="img-slot" data-img-slot="yuma" style="display:block;width:100%;aspect-ratio:4/5;border:1px solid rgba(200,154,62,.3);border-radius:18px">
             <div class="img-slot__inner"><span class="img-slot__glyph">ᤕ</span><span class="img-slot__label">Yuma · Limbu woman / shrine</span></div>
           </figure>
         </div>
         <div style="order:1">
-          <h2 data-reveal data-reveal-delay="120" style="opacity:0;transform:translateY(30px);transition:all 1.05s cubic-bezier(.16,.85,.3,1);font-family:'Marcellus',serif;font-weight:400;font-size:clamp(34px,5.4vw,72px);line-height:1.06;margin:0 0 26px">She is mother, earth, and home.</h2>
-          <p data-reveal data-reveal-delay="200" style="opacity:0;transform:translateY(24px);transition:all 1s cubic-bezier(.16,.85,.3,1);font-size:clamp(15px,1.6vw,18px);line-height:1.78;color:rgba(236,225,205,.82);margin:0 0 18px;text-wrap:pretty">At the centre of Limbu faith stands <strong style="color:#e7c87f;font-weight:600">Yuma Sammang</strong>, also called Ningwaphuma, grandmother, Mother Earth, protector of the household. Her worship runs through every home.</p>
-          <p data-reveal data-reveal-delay="280" style="opacity:0;transform:translateY(24px);transition:all 1s cubic-bezier(.16,.85,.3,1);font-size:clamp(15px,1.6vw,18px);line-height:1.78;color:rgba(236,225,205,.82);margin:0;text-wrap:pretty">Her line is matrilineal: a daughter inherits her mother's gods and carries them into marriage, where they become the deities of the new home. The Limbu house itself is built as a feminine form, a body of Yuma.</p>
+          <h2 class="reveal" data-reveal data-reveal-delay="120" style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(34px,5.4vw,72px);line-height:1.06;margin:0 0 26px">She is mother, earth, and home.</h2>
+          <p class="reveal" data-reveal data-reveal-delay="200" style="font-size:clamp(15px,1.6vw,18px);line-height:1.78;color:rgba(236,225,205,.82);margin:0 0 18px;text-wrap:pretty">At the centre of Limbu faith stands <strong style="color:#e7c87f;font-weight:600">Yuma Sammang</strong>, also called Ningwaphuma, grandmother, Mother Earth, protector of the household. Her worship runs through every home.</p>
+          <p class="reveal" data-reveal data-reveal-delay="280" style="font-size:clamp(15px,1.6vw,18px);line-height:1.78;color:rgba(236,225,205,.82);margin:0;text-wrap:pretty">Her line is matrilineal: a daughter inherits her mother's gods and carries them into marriage, where they become the deities of the new home. The Limbu house itself is built as a feminine form, a body of Yuma.</p>
         </div>
       </div>
     </div>
@@ -236,30 +266,30 @@
   <!-- ============ 05 PHEDANGMA / SAMBA ============ -->
   <section id="sec-shaman" data-chapter data-screen-label="Phedangma" style="position:relative;padding:clamp(110px,16vh,190px) clamp(26px,7vw,150px);background:#150f0a">
     <div style="max-width:1140px;margin:0 auto">
-      <div data-reveal style="opacity:0;transform:translateY(28px);transition:all 1s cubic-bezier(.16,.85,.3,1);display:flex;align-items:center;gap:18px;margin-bottom:40px">
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;color:#c89a3e">05</span>
-        <span style="width:52px;height:1px;background:rgba(200,154,62,.5)"></span>
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:rgba(236,225,205,.6)">Keepers of the Mundhum</span>
+      <div class="reveal section-tag" data-reveal>
+        <span class="section-tag__num">05</span>
+        <span class="section-tag__rule"></span>
+        <span class="section-tag__label">Keepers of the Mundhum</span>
       </div>
-      <h2 data-reveal data-reveal-delay="120" style="opacity:0;transform:translateY(30px);transition:all 1.05s cubic-bezier(.16,.85,.3,1);font-family:'Marcellus',serif;font-weight:400;font-size:clamp(34px,5.6vw,76px);line-height:1.05;margin:0 0 22px;max-width:18ch;text-wrap:balance">The ones born remembering.</h2>
-      <p data-reveal data-reveal-delay="200" style="opacity:0;transform:translateY(24px);transition:all 1s cubic-bezier(.16,.85,.3,1);max-width:740px;font-size:clamp(15px,1.6vw,18px);line-height:1.76;color:rgba(236,225,205,.82);margin:0 0 56px;text-wrap:pretty">The <span data-term="Phedangma" data-def="A Limbu priest-shaman and custodian of the Mundhum. The Phedangma recites, sings and dramatises the oral scripture, and heals." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Phedangma</span>, <span data-term="Samba" data-def="A ritual singer of the Limbu epics, said to be born with innate knowledge of the Mundhum. The Sambas are now few." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Samba</span> and Yeba/Yema are not appointed, tradition holds they are born already knowing the Mundhum. Crowned with the feathers of the danphe and crested birds, bells at their waists, they carry a soul from before its birth to beyond its death.</p>
+      <h2 class="reveal" data-reveal data-reveal-delay="120" style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(34px,5.6vw,76px);line-height:1.05;margin:0 0 22px;max-width:18ch;text-wrap:balance">The ones born remembering.</h2>
+      <p class="reveal" data-reveal data-reveal-delay="200" style="max-width:740px;font-size:clamp(15px,1.6vw,18px);line-height:1.76;color:rgba(236,225,205,.82);margin:0 0 56px;text-wrap:pretty">The <span data-term="Phedangma" data-def="A Limbu priest-shaman and custodian of the Mundhum. The Phedangma recites, sings and dramatises the oral scripture, and heals." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Phedangma</span>, <span data-term="Samba" data-def="A ritual singer of the Limbu epics, said to be born with innate knowledge of the Mundhum. The Sambas are now few." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Samba</span> and Yeba/Yema are not appointed, tradition holds they are born already knowing the Mundhum. Crowned with the feathers of the danphe and crested birds, bells at their waists, they carry a soul from before its birth to beyond its death.</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px">
-        <div data-reveal data-reveal-delay="120" style="opacity:0;transform:translateY(28px);transition:all 1s cubic-bezier(.16,.85,.3,1);padding:26px 24px;border:1px solid rgba(236,225,205,.14);border-radius:14px;background:linear-gradient(180deg,rgba(236,225,205,.03),transparent)">
+        <div class="reveal" data-reveal data-reveal-delay="120" style="padding:26px 24px;border:1px solid rgba(236,225,205,.14);border-radius:14px;background:linear-gradient(180deg,rgba(236,225,205,.03),transparent)">
           <div class="limbu" lang="lif" aria-hidden="true" style="font-family:'Noto Sans Limbu',serif;font-size:30px;color:#c89a3e;margin-bottom:14px">ᤀ</div>
           <div style="font-family:'Marcellus',serif;font-size:21px;color:#f1e3c8;margin-bottom:6px">Sappok Chomen</div>
           <div style="font-size:14px;line-height:1.6;color:rgba(236,225,205,.72)">A prayer offered for the child still unborn, the first rite of a Limbu life.</div>
         </div>
-        <div data-reveal data-reveal-delay="220" style="opacity:0;transform:translateY(28px);transition:all 1s cubic-bezier(.16,.85,.3,1);padding:26px 24px;border:1px solid rgba(236,225,205,.14);border-radius:14px;background:linear-gradient(180deg,rgba(236,225,205,.03),transparent)">
+        <div class="reveal" data-reveal data-reveal-delay="220" style="padding:26px 24px;border:1px solid rgba(236,225,205,.14);border-radius:14px;background:linear-gradient(180deg,rgba(236,225,205,.03),transparent)">
           <div class="limbu" lang="lif" aria-hidden="true" style="font-family:'Noto Sans Limbu',serif;font-size:30px;color:#c89a3e;margin-bottom:14px">ᤁ</div>
           <div style="font-family:'Marcellus',serif;font-size:21px;color:#f1e3c8;margin-bottom:6px">Sawanchingma</div>
           <div style="font-size:14px;line-height:1.6;color:rgba(236,225,205,.72)">The birth rite that welcomes a new soul into the household and the clan.</div>
         </div>
-        <div data-reveal data-reveal-delay="320" style="opacity:0;transform:translateY(28px);transition:all 1s cubic-bezier(.16,.85,.3,1);padding:26px 24px;border:1px solid rgba(236,225,205,.14);border-radius:14px;background:linear-gradient(180deg,rgba(236,225,205,.03),transparent)">
+        <div class="reveal" data-reveal data-reveal-delay="320" style="padding:26px 24px;border:1px solid rgba(236,225,205,.14);border-radius:14px;background:linear-gradient(180deg,rgba(236,225,205,.03),transparent)">
           <div class="limbu" lang="lif" aria-hidden="true" style="font-family:'Noto Sans Limbu',serif;font-size:30px;color:#c89a3e;margin-bottom:14px">ᤄ</div>
           <div style="font-family:'Marcellus',serif;font-size:21px;color:#f1e3c8;margin-bottom:6px">Yuma Worship</div>
           <div style="font-size:14px;line-height:1.6;color:rgba(236,225,205,.72)">Household devotion to the grandmother goddess, inherited down the female line.</div>
         </div>
-        <div data-reveal data-reveal-delay="420" style="opacity:0;transform:translateY(28px);transition:all 1s cubic-bezier(.16,.85,.3,1);padding:26px 24px;border:1px solid rgba(236,225,205,.14);border-radius:14px;background:linear-gradient(180deg,rgba(236,225,205,.03),transparent)">
+        <div class="reveal" data-reveal data-reveal-delay="420" style="padding:26px 24px;border:1px solid rgba(236,225,205,.14);border-radius:14px;background:linear-gradient(180deg,rgba(236,225,205,.03),transparent)">
           <div class="limbu" lang="lif" aria-hidden="true" style="font-family:'Noto Sans Limbu',serif;font-size:30px;color:#c89a3e;margin-bottom:14px">ᤐ</div>
           <div style="font-family:'Marcellus',serif;font-size:21px;color:#f1e3c8;margin-bottom:6px">Yagu Changsima</div>
           <div style="font-size:14px;line-height:1.6;color:rgba(236,225,205,.72)">The death rite that parts the living soul (Hangsam) from the spirit of the dead (Thawasam).</div>
@@ -271,18 +301,18 @@
   <!-- ============ 06 DANCE & DRUM (cream) ============ -->
   <section id="sec-dance" data-chapter data-screen-label="Dance & Drum" style="position:relative;padding:clamp(110px,16vh,190px) clamp(26px,7vw,150px);background:#e7dcc4;color:#241811;overflow:hidden">
     <div style="max-width:1180px;margin:0 auto">
-      <div data-reveal style="opacity:0;transform:translateY(28px);transition:all 1s cubic-bezier(.16,.85,.3,1);display:flex;align-items:center;gap:18px;margin-bottom:36px">
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;color:#a14227">06</span>
-        <span style="width:52px;height:1px;background:rgba(161,66,39,.5)"></span>
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:rgba(36,24,17,.74)">Dance &amp; drum</span>
+      <div class="reveal section-tag section-tag--cream" data-reveal>
+        <span class="section-tag__num">06</span>
+        <span class="section-tag__rule"></span>
+        <span class="section-tag__label">Dance &amp; drum</span>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(30px,5vw,68px);align-items:center">
         <div>
-          <h2 data-reveal data-reveal-delay="120" style="opacity:0;transform:translateY(30px);transition:all 1.05s cubic-bezier(.16,.85,.3,1);font-family:'Marcellus',serif;font-weight:400;font-size:clamp(34px,5.4vw,72px);line-height:1.05;margin:0 0 22px">When the Chyabhrung speaks, the village rises.</h2>
-          <p data-reveal data-reveal-delay="200" style="opacity:0;transform:translateY(24px);transition:all 1s cubic-bezier(.16,.85,.3,1);font-size:clamp(15px,1.6vw,18px);line-height:1.76;color:rgba(36,24,17,.78);margin:0 0 18px;text-wrap:pretty">The <span data-term="Chyabhrung" data-def="The large Limbu drum, and the leaping drum-dance (Kelang) performed with it. Slung across the body, it is struck on both heads as the dancer turns." role="button" tabindex="0" style="border-bottom:1px dashed rgba(161,66,39,.65);cursor:help;color:#8a3420">Chyabhrung</span> drum dance moves in great leaping steps. In the <span data-term="Yalang" data-def="The paddy or “Dhan Nach”, dancers link arms in a long line, stepping in unison while singing courtship verses called Palam." role="button" tabindex="0" style="border-bottom:1px dashed rgba(161,66,39,.65);cursor:help;color:#8a3420">Yalang</span> paddy dance, young men and women link arms in a swaying line, trading verses of <span data-term="Palam" data-def="Improvised Limbu courtship songs, exchanged between partners during the Dhan Nach, flirtatious, poetic, and often witty." role="button" tabindex="0" style="border-bottom:1px dashed rgba(161,66,39,.65);cursor:help;color:#8a3420">Palam</span> beneath the moon.</p>
+          <h2 class="reveal" data-reveal data-reveal-delay="120" style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(34px,5.4vw,72px);line-height:1.05;margin:0 0 22px">When the Chyabhrung speaks, the village rises.</h2>
+          <p class="reveal" data-reveal data-reveal-delay="200" style="font-size:clamp(15px,1.6vw,18px);line-height:1.76;color:rgba(36,24,17,.78);margin:0 0 18px;text-wrap:pretty">The <span data-term="Chyabhrung" data-def="The large Limbu drum, and the leaping drum-dance (Kelang) performed with it. Slung across the body, it is struck on both heads as the dancer turns." role="button" tabindex="0" style="border-bottom:1px dashed rgba(161,66,39,.65);cursor:help;color:#8a3420">Chyabhrung</span> drum dance moves in great leaping steps. In the <span data-term="Yalang" data-def="The paddy or “Dhan Nach”, dancers link arms in a long line, stepping in unison while singing courtship verses called Palam." role="button" tabindex="0" style="border-bottom:1px dashed rgba(161,66,39,.65);cursor:help;color:#8a3420">Yalang</span> paddy dance, young men and women link arms in a swaying line, trading verses of <span data-term="Palam" data-def="Improvised Limbu courtship songs, exchanged between partners during the Dhan Nach, flirtatious, poetic, and often witty." role="button" tabindex="0" style="border-bottom:1px dashed rgba(161,66,39,.65);cursor:help;color:#8a3420">Palam</span> beneath the moon.</p>
           <button id="dance-audio-cue" type="button" aria-pressed="false" style="display:inline-flex;align-items:center;gap:10px;margin-top:8px;padding:12px 20px;border-radius:40px;border:1px solid rgba(161,66,39,.5);background:transparent;color:#8a3420;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">▸ Hear the drum</button>
         </div>
-        <div data-reveal data-reveal-delay="160" style="opacity:0;transform:translateY(30px);transition:all 1.1s cubic-bezier(.16,.85,.3,1)">
+        <div class="reveal" data-reveal data-reveal-delay="160">
           <figure class="img-slot img-slot--cream" data-img-slot="dance" style="display:block;width:100%;aspect-ratio:5/4;border:1px solid rgba(36,24,17,.16);border-radius:18px">
             <div class="img-slot__inner"><span class="img-slot__glyph">ᤖ</span><span class="img-slot__label">Chyabhrung / Dhan Nach dance</span></div>
           </figure>
@@ -295,15 +325,15 @@
   <section id="sec-archery" data-chapter data-screen-label="Archers" style="position:relative;padding:clamp(120px,18vh,220px) clamp(26px,7vw,150px);overflow:hidden">
     <div data-parallax="0.08" class="limbu" aria-hidden="true" style="position:absolute;right:-6%;top:0;font-family:'Noto Sans Limbu',serif;font-size:clamp(200px,40vw,560px);line-height:1;color:rgba(177,74,48,.05);pointer-events:none;user-select:none">ᤕ</div>
     <div style="max-width:1040px;margin:0 auto;position:relative">
-      <div data-reveal style="opacity:0;transform:translateY(28px);transition:all 1s cubic-bezier(.16,.85,.3,1);display:flex;align-items:center;gap:18px;margin-bottom:40px">
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;color:#c89a3e">07</span>
-        <span style="width:52px;height:1px;background:rgba(200,154,62,.5)"></span>
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:rgba(236,225,205,.6)">Archers of the hills</span>
+      <div class="reveal section-tag" data-reveal>
+        <span class="section-tag__num">07</span>
+        <span class="section-tag__rule"></span>
+        <span class="section-tag__label">Archers of the hills</span>
       </div>
-      <h2 data-reveal data-reveal-delay="120" style="opacity:0;transform:translateY(30px);transition:all 1.05s cubic-bezier(.16,.85,.3,1);font-family:'Marcellus',serif;font-weight:400;font-size:clamp(36px,6.2vw,84px);line-height:1.04;margin:0 0 30px;text-wrap:balance">The name itself means <span style="color:#c89a3e;font-style:italic">“to loose an arrow.”</span></h2>
+      <h2 class="reveal" data-reveal data-reveal-delay="120" style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(36px,6.2vw,84px);line-height:1.04;margin:0 0 30px;text-wrap:balance">The name itself means <span style="color:#c89a3e;font-style:italic">“to loose an arrow.”</span></h2>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(28px,4vw,56px)">
-        <p data-reveal data-reveal-delay="200" style="opacity:0;transform:translateY(24px);transition:all 1s cubic-bezier(.16,.85,.3,1);font-size:clamp(15px,1.6vw,18px);line-height:1.78;color:rgba(236,225,205,.82);margin:0;text-wrap:pretty">Legend tells of a Gorkha general who met a Yakthung hunter in the forest and asked what he was doing. <em style="color:#e7c87f">“Lim-pfungh”</em>, shooting arrows, came the reply. The word stuck, and so the Gorkhas wrote down the name <strong style="color:#e7c87f;font-weight:600">Limbu</strong>.</p>
-        <p data-reveal data-reveal-delay="300" style="opacity:0;transform:translateY(24px);transition:all 1s cubic-bezier(.16,.85,.3,1);font-size:clamp(15px,1.6vw,18px);line-height:1.78;color:rgba(236,225,205,.82);margin:0;text-wrap:pretty">Archery was never only sport. Limbu horseback archers held their hills against invasion, and for years their arrows answered the Gorkha advance, a defence remembered long after the wars were lost. The bow remains a sacred thing.</p>
+        <p class="reveal" data-reveal data-reveal-delay="200" style="font-size:clamp(15px,1.6vw,18px);line-height:1.78;color:rgba(236,225,205,.82);margin:0;text-wrap:pretty">Legend tells of a Gorkha general who met a Yakthung hunter in the forest and asked what he was doing. <em style="color:#e7c87f">“Lim-pfungh”</em>, shooting arrows, came the reply. The word stuck, and so the Gorkhas wrote down the name <strong style="color:#e7c87f;font-weight:600">Limbu</strong>.</p>
+        <p class="reveal" data-reveal data-reveal-delay="300" style="font-size:clamp(15px,1.6vw,18px);line-height:1.78;color:rgba(236,225,205,.82);margin:0;text-wrap:pretty">Archery was never only sport. Limbu horseback archers held their hills against invasion, and for years their arrows answered the Gorkha advance, a defence remembered long after the wars were lost. The bow remains a sacred thing.</p>
       </div>
     </div>
   </section>
@@ -311,21 +341,21 @@
   <!-- ============ 08 TONGBA (cream) ============ -->
   <section id="sec-tongba" data-chapter data-screen-label="Tongba" style="position:relative;padding:clamp(110px,16vh,190px) clamp(26px,7vw,150px);background:#e7dcc4;color:#241811">
     <div style="max-width:1180px;margin:0 auto">
-      <div data-reveal style="opacity:0;transform:translateY(28px);transition:all 1s cubic-bezier(.16,.85,.3,1);display:flex;align-items:center;gap:18px;margin-bottom:36px">
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;color:#a14227">08</span>
-        <span style="width:52px;height:1px;background:rgba(161,66,39,.5)"></span>
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:rgba(36,24,17,.74)">Warmth in a vessel</span>
+      <div class="reveal section-tag section-tag--cream" data-reveal>
+        <span class="section-tag__num">08</span>
+        <span class="section-tag__rule"></span>
+        <span class="section-tag__label">Warmth in a vessel</span>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(30px,5vw,68px);align-items:center">
-        <div data-reveal data-reveal-delay="160" style="opacity:0;transform:translateY(30px);transition:all 1.1s cubic-bezier(.16,.85,.3,1);order:2">
+        <div class="reveal" data-reveal data-reveal-delay="160" style="order:2">
           <figure class="img-slot img-slot--cream" data-img-slot="tongba" style="display:block;width:100%;aspect-ratio:5/4;border:1px solid rgba(36,24,17,.16);border-radius:18px">
             <div class="img-slot__inner"><span class="img-slot__glyph">ᤳ</span><span class="img-slot__label">Tongba · millet beer</span></div>
           </figure>
         </div>
         <div style="order:1">
-          <h2 data-reveal data-reveal-delay="120" style="opacity:0;transform:translateY(30px);transition:all 1.05s cubic-bezier(.16,.85,.3,1);font-family:'Marcellus',serif;font-weight:400;font-size:clamp(34px,5.4vw,72px);line-height:1.05;margin:0 0 22px">A wooden cup, sipped through bamboo.</h2>
-          <p data-reveal data-reveal-delay="200" style="opacity:0;transform:translateY(24px);transition:all 1s cubic-bezier(.16,.85,.3,1);font-size:clamp(15px,1.6vw,18px);line-height:1.76;color:rgba(36,24,17,.78);margin:0 0 18px;text-wrap:pretty"><span data-term="Tongba" data-def="Warm millet beer and the vessel it is served in. Fermented millet is packed in a wooden tongba, topped with hot water, and sipped through a bamboo straw called a pipsing." role="button" tabindex="0" style="border-bottom:1px dashed rgba(161,66,39,.65);cursor:help;color:#8a3420">Tongba</span> is fermented millet, warmed with hot water and drawn up through a bamboo straw. More refilling, more warmth, the cup never quite empties.</p>
-          <p data-reveal data-reveal-delay="280" style="opacity:0;transform:translateY(24px);transition:all 1s cubic-bezier(.16,.85,.3,1);font-size:clamp(15px,1.6vw,18px);line-height:1.76;color:rgba(36,24,17,.78);margin:0;text-wrap:pretty">Millet beer threads through Limbu life, at weddings and at funerals, in the giving of gifts and the settling of quarrels. To share it is to keep the social order whole.</p>
+          <h2 class="reveal" data-reveal data-reveal-delay="120" style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(34px,5.4vw,72px);line-height:1.05;margin:0 0 22px">A wooden cup, sipped through bamboo.</h2>
+          <p class="reveal" data-reveal data-reveal-delay="200" style="font-size:clamp(15px,1.6vw,18px);line-height:1.76;color:rgba(36,24,17,.78);margin:0 0 18px;text-wrap:pretty"><span data-term="Tongba" data-def="Warm millet beer and the vessel it is served in. Fermented millet is packed in a wooden tongba, topped with hot water, and sipped through a bamboo straw called a pipsing." role="button" tabindex="0" style="border-bottom:1px dashed rgba(161,66,39,.65);cursor:help;color:#8a3420">Tongba</span> is fermented millet, warmed with hot water and drawn up through a bamboo straw. More refilling, more warmth, the cup never quite empties.</p>
+          <p class="reveal" data-reveal data-reveal-delay="280" style="font-size:clamp(15px,1.6vw,18px);line-height:1.76;color:rgba(36,24,17,.78);margin:0;text-wrap:pretty">Millet beer threads through Limbu life, at weddings and at funerals, in the giving of gifts and the settling of quarrels. To share it is to keep the social order whole.</p>
         </div>
       </div>
     </div>
@@ -334,14 +364,14 @@
   <!-- ============ 09 LANGUAGE & SCRIPT ============ -->
   <section id="sec-language" data-chapter data-screen-label="Language" style="position:relative;padding:clamp(110px,16vh,200px) clamp(26px,7vw,150px);overflow:hidden">
     <div style="max-width:1140px;margin:0 auto">
-      <div data-reveal style="opacity:0;transform:translateY(28px);transition:all 1s cubic-bezier(.16,.85,.3,1);display:flex;align-items:center;gap:18px;margin-bottom:40px">
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;color:#c89a3e">09</span>
-        <span style="width:52px;height:1px;background:rgba(200,154,62,.5)"></span>
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:rgba(236,225,205,.6)">Tongue &amp; script</span>
+      <div class="reveal section-tag" data-reveal>
+        <span class="section-tag__num">09</span>
+        <span class="section-tag__rule"></span>
+        <span class="section-tag__label">Tongue &amp; script</span>
       </div>
-      <h2 data-reveal data-reveal-delay="120" style="opacity:0;transform:translateY(30px);transition:all 1.05s cubic-bezier(.16,.85,.3,1);font-family:'Marcellus',serif;font-weight:400;font-size:clamp(34px,5.6vw,76px);line-height:1.05;margin:0 0 22px;max-width:18ch;text-wrap:balance">A language with its own alphabet of light.</h2>
-      <p data-reveal data-reveal-delay="200" style="opacity:0;transform:translateY(24px);transition:all 1s cubic-bezier(.16,.85,.3,1);max-width:720px;font-size:clamp(15px,1.6vw,18px);line-height:1.76;color:rgba(236,225,205,.82);margin:0 0 54px;text-wrap:pretty">The Limbu speak <span data-term="Yakthungpan" data-def="The Limbu language, part of the Tibeto-Burman family. Its older forms are preserved inside the poetry of the Mundhum." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Yakthungpan</span>, a Tibeto-Burman tongue, and write it in the <span data-term="Sirijunga" data-def="The Limbu script, also called Kirat-Sirijonga, revived in the 18th century and named for the scholar-saint Sirijunga. It now lives in Unicode." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Sirijunga</span> script, revived from near-loss and now encoded for the digital age. Run your eye across the letters.</p>
-      <div data-reveal data-reveal-delay="160" class="limbu" style="opacity:0;transition:all 1.1s ease;display:flex;flex-wrap:wrap;gap:14px;max-width:920px">
+      <h2 class="reveal" data-reveal data-reveal-delay="120" style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(34px,5.6vw,76px);line-height:1.05;margin:0 0 22px;max-width:18ch;text-wrap:balance">A language with its own alphabet of light.</h2>
+      <p class="reveal" data-reveal data-reveal-delay="200" style="max-width:720px;font-size:clamp(15px,1.6vw,18px);line-height:1.76;color:rgba(236,225,205,.82);margin:0 0 54px;text-wrap:pretty">The Limbu speak <span data-term="Yakthungpan" data-def="The Limbu language, part of the Tibeto-Burman family. Its older forms are preserved inside the poetry of the Mundhum." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Yakthungpan</span>, a Tibeto-Burman tongue, and write it in the <span data-term="Sirijunga" data-def="The Limbu script, also called Kirat-Sirijonga, revived in the 18th century and named for the scholar-saint Sirijunga. It now lives in Unicode." role="button" tabindex="0" style="border-bottom:1px dashed rgba(200,154,62,.6);cursor:help;color:#e7c87f">Sirijunga</span> script, revived from near-loss and now encoded for the digital age. Run your eye across the letters.</p>
+      <div data-reveal data-reveal-delay="160" class="limbu reveal-fade" style="display:flex;flex-wrap:wrap;gap:14px;max-width:920px">
         <div data-glyph style="width:74px;height:84px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;border:1px solid rgba(236,225,205,.14);border-radius:12px;background:linear-gradient(180deg,rgba(236,225,205,.03),transparent);transition:all .3s;cursor:default"><div lang="lif" style="font-family:'Noto Sans Limbu',serif;font-size:30px;color:#f1e3c8">ᤁ</div><div style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(236,225,205,.62)">ka</div></div>
         <div data-glyph style="width:74px;height:84px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;border:1px solid rgba(236,225,205,.14);border-radius:12px;background:linear-gradient(180deg,rgba(236,225,205,.03),transparent);transition:all .3s;cursor:default"><div lang="lif" style="font-family:'Noto Sans Limbu',serif;font-size:30px;color:#f1e3c8">ᤂ</div><div style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(236,225,205,.62)">kha</div></div>
         <div data-glyph style="width:74px;height:84px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;border:1px solid rgba(236,225,205,.14);border-radius:12px;background:linear-gradient(180deg,rgba(236,225,205,.03),transparent);transition:all .3s;cursor:default"><div lang="lif" style="font-family:'Noto Sans Limbu',serif;font-size:30px;color:#f1e3c8">ᤃ</div><div style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(236,225,205,.62)">ga</div></div>
@@ -367,17 +397,17 @@
   <section id="sec-today" data-chapter data-screen-label="Today" style="position:relative;padding:clamp(110px,16vh,200px) clamp(26px,7vw,150px) clamp(80px,12vh,140px);overflow:hidden;background:linear-gradient(180deg,#1c140f 0%,#241410 100%)">
     <div data-parallax="0.05" aria-hidden="true" style="position:absolute;left:50%;bottom:-10%;transform:translateX(-50%);width:min(80vw,900px);height:min(60vw,640px);background:radial-gradient(ellipse at 50% 100%,rgba(177,74,48,.22),transparent 70%);pointer-events:none"></div>
     <div style="max-width:1040px;margin:0 auto;position:relative">
-      <div data-reveal style="opacity:0;transform:translateY(28px);transition:all 1s cubic-bezier(.16,.85,.3,1);display:flex;align-items:center;gap:18px;margin-bottom:40px">
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;color:#c89a3e">10</span>
-        <span style="width:52px;height:1px;background:rgba(200,154,62,.5)"></span>
-        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:rgba(236,225,205,.6)">The living present</span>
+      <div class="reveal section-tag" data-reveal>
+        <span class="section-tag__num">10</span>
+        <span class="section-tag__rule"></span>
+        <span class="section-tag__label">The living present</span>
       </div>
-      <h2 data-reveal data-reveal-delay="120" style="opacity:0;transform:translateY(30px);transition:all 1.05s cubic-bezier(.16,.85,.3,1);font-family:'Marcellus',serif;font-weight:400;font-size:clamp(36px,6vw,82px);line-height:1.04;margin:0 0 28px;max-width:16ch;text-wrap:balance">The Sambas grow few, but the voice has not gone silent.</h2>
+      <h2 class="reveal" data-reveal data-reveal-delay="120" style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(36px,6vw,82px);line-height:1.04;margin:0 0 28px;max-width:16ch;text-wrap:balance">The Sambas grow few, but the voice has not gone silent.</h2>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(28px,4vw,56px);margin-bottom:64px">
-        <p data-reveal data-reveal-delay="200" style="opacity:0;transform:translateY(24px);transition:all 1s cubic-bezier(.16,.85,.3,1);font-size:clamp(15px,1.6vw,18px);line-height:1.78;color:rgba(236,225,205,.82);margin:0;text-wrap:pretty">Today the Limbu live across eastern Nepal, Sikkim and Darjeeling, and in a diaspora reaching Britain, Hong Kong, the Gulf and beyond. The reformer <strong style="color:#e7c87f;font-weight:600">Mahaguru Falgunanda</strong> (1885 to 1949) is honoured as a national hero of Nepal.</p>
-        <p data-reveal data-reveal-delay="300" style="opacity:0;transform:translateY(24px);transition:all 1s cubic-bezier(.16,.85,.3,1);font-size:clamp(15px,1.6vw,18px);line-height:1.78;color:rgba(236,225,205,.82);margin:0;text-wrap:pretty">Groups like the Kirat Yakthung Chumlung and the Yakthung Academy now record Mundhum chants, translate the epics, and teach the script to children, turning an oral inheritance into one the future can hold.</p>
+        <p class="reveal" data-reveal data-reveal-delay="200" style="font-size:clamp(15px,1.6vw,18px);line-height:1.78;color:rgba(236,225,205,.82);margin:0;text-wrap:pretty">Today the Limbu live across eastern Nepal, Sikkim and Darjeeling, and in a diaspora reaching Britain, Hong Kong, the Gulf and beyond. The reformer <strong style="color:#e7c87f;font-weight:600">Mahaguru Falgunanda</strong> (1885 to 1949) is honoured as a national hero of Nepal.</p>
+        <p class="reveal" data-reveal data-reveal-delay="300" style="font-size:clamp(15px,1.6vw,18px);line-height:1.78;color:rgba(236,225,205,.82);margin:0;text-wrap:pretty">Groups like the Kirat Yakthung Chumlung and the Yakthung Academy now record Mundhum chants, translate the epics, and teach the script to children, turning an oral inheritance into one the future can hold.</p>
       </div>
-      <div data-reveal data-reveal-delay="160" style="opacity:0;transform:translateY(20px);transition:all 1s ease;display:flex;flex-wrap:wrap;gap:clamp(28px,5vw,72px);padding-top:40px;border-top:1px solid rgba(236,225,205,.12)">
+      <div class="reveal" data-reveal data-reveal-delay="160" style="display:flex;flex-wrap:wrap;gap:clamp(28px,5vw,72px);padding-top:40px;border-top:1px solid rgba(236,225,205,.12)">
         <div style="min-width:140px">
           <div style="font-family:'Marcellus',serif;font-size:clamp(40px,5vw,62px);color:#c89a3e;line-height:1">~9</div>
           <div style="font-size:13.5px;line-height:1.5;color:rgba(236,225,205,.72);margin-top:8px;max-width:22ch">historic territories united as Limbuwan</div>
@@ -391,7 +421,7 @@
           <div style="font-size:13.5px;line-height:1.5;color:rgba(236,225,205,.72);margin-top:8px;max-width:22ch">countries the Yakthung diaspora now calls home</div>
         </div>
       </div>
-      <div data-reveal data-reveal-delay="240" style="opacity:0;transition:all 1.2s ease;text-align:center;margin-top:clamp(80px,14vh,160px)">
+      <div class="reveal-fade" data-reveal data-reveal-delay="240" style="text-align:center;margin-top:clamp(80px,14vh,160px)">
         <div class="limbu" lang="lif" style="font-family:'Noto Sans Limbu',serif;font-size:clamp(40px,7vw,84px);color:rgba(241,227,200,.92);margin-bottom:18px;animation:scriptGlow 7s ease-in-out infinite">ᤕᤠᤰᤌᤢᤱᤒᤠ</div>
         <div style="font-family:'Marcellus',serif;font-style:italic;font-size:clamp(18px,2.2vw,26px);color:rgba(236,225,205,.7)">The lost identities are still alive, listen.</div>
         <div style="font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(236,225,205,.58);margin-top:40px;line-height:1.9">Made for education &amp; community pride · Yakthung heritage<br>Sourced from Kirat &amp; Limbu scholarship, oral tradition and the Mundhum</div>
